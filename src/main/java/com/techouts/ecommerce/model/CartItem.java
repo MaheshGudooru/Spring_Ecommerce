@@ -1,0 +1,42 @@
+package com.techouts.ecommerce.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "cart_items")
+@Getter
+@Setter
+@NoArgsConstructor
+public class CartItem {
+
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id", nullable = false)
+    private Cart cartId;
+
+    @CreationTimestamp
+    @Column(name = "added_date")
+    private LocalDateTime addedToCartDate;
+
+    private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product productId;
+
+    public CartItem(Cart cartId, Product productId, int quantity) {
+        this.cartId = cartId;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
+}

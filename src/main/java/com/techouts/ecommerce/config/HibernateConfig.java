@@ -20,8 +20,12 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 public class HibernateConfig {
 
-    @Autowired
     private Environment env;
+
+    @Autowired
+    HibernateConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource dataSource() {
@@ -47,7 +51,12 @@ public class HibernateConfig {
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
-
+        props.put("hibernate.use_sql_comments", env.getProperty("hibernate.use_sql_comments"));
+        props.put("hibernate.cache.use_second_level_cache", env.getProperty ("hibernate.cache.use_second_level_cache"));
+        props.put("hibernate.cache.use_query_cache", env.getProperty ("hibernate.cache.use_query_cache"));
+        props.put("hibernate.cache.region.factory_class", env.getProperty ("hibernate.cache.region.factory_class"));
+        props.put("hibernate.javax.cache.provider", env.getProperty ("hibernate.javax.cache.provider"));
+        props.put("hibernate.generate_statistics", env.getProperty ("hibernate.generate_statistics"));
         sessionFactoryBean.setHibernateProperties (props);
 
         return sessionFactoryBean;

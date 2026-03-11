@@ -1,0 +1,228 @@
+       /* =========================================
+           GLOBAL & VARIABLES
+           ========================================= */
+       :root {
+           --color-bg: #ffffff;
+           --color-bg-alt: #fafafa;
+           --color-text: #111111;
+           --color-text-light: #666666;
+           --color-border: #eaeaec;
+           --color-accent: #111111;
+       }
+
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       }
+
+       body {
+           background-color: var(--color-bg-alt);
+           color: var(--color-text);
+           display: flex;
+           flex-direction: column;
+           min-height: 100vh;
+           line-height: 1.6;
+       }
+
+       /* =========================================
+           HEADER (Matches Homepage)
+           ========================================= */
+       .site-header {
+           background: var(--color-bg);
+           border-bottom: 1px solid var(--color-border);
+           padding: 20px 0;
+       }
+
+       .container {
+           max-width: 1200px;
+           margin: 0 auto;
+           padding: 0 20px;
+       }
+
+       .header-content {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+       }
+
+       .logo {
+           font-size: 1.5rem;
+           font-weight: 800;
+           /* Extra bold like screenshot */
+           letter-spacing: -1px;
+           text-decoration: none;
+           color: var(--color-text);
+           text-transform: uppercase;
+       }
+
+       .user-nav a {
+           font-size: 0.9rem;
+           font-weight: 600;
+           text-decoration: none;
+           color: var(--color-text);
+           margin-left: 20px;
+       }
+
+       /* =========================================
+           LOGIN SECTION
+           ========================================= */
+       .auth-main {
+           flex: 1;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           padding: 60px 20px;
+       }
+
+       /* The Card - Mimics the clean product cards */
+       .login-card {
+           background: #fff;
+           width: 100%;
+           max-width: 450px;
+           padding: 50px 40px;
+           border: 1px solid #f0f0f0;
+           /* Subtle border */
+           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+           /* Premium soft shadow */
+           border-radius: 4px;
+           text-align: center;
+       }
+
+       /* Typography matches "ELEVATE YOUR EVERYDAY" style */
+       .login-title {
+           font-size: 2rem;
+           font-weight: 800;
+           text-transform: uppercase;
+           letter-spacing: -1px;
+           margin-bottom: 10px;
+           line-height: 1;
+       }
+
+       .login-subtitle {
+           color: var(--color-text-light);
+           font-size: 0.95rem;
+           margin-bottom: 35px;
+       }
+
+       /* Form Elements */
+       .form-group {
+           margin-bottom: 20px;
+           text-align: left;
+       }
+
+       .form-group label {
+           display: block;
+           font-size: 0.75rem;
+           font-weight: 700;
+           margin-bottom: 8px;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+           color: var(--color-text);
+       }
+
+       .form-group input {
+           width: 100%;
+           padding: 14px;
+           background-color: #fff;
+           border: 1px solid var(--color-border);
+           border-radius: 0;
+           /* Sharp edges for minimal look */
+           font-size: 1rem;
+           transition: all 0.3s ease;
+           outline: none;
+       }
+
+       .form-group input:focus {
+           border-color: var(--color-accent);
+       }
+
+       /* =========================================
+           THE BUTTON (Your requested hover effect)
+           ========================================= */
+       .btn-login {
+           width: 100%;
+           background-color: var(--color-accent);
+           /* Solid Black */
+           color: #ffffff;
+           border: 2px solid var(--color-accent);
+           /* Border matches bg */
+           padding: 16px;
+           font-size: 0.9rem;
+           font-weight: 700;
+           text-transform: uppercase;
+           letter-spacing: 1.5px;
+           cursor: pointer;
+           margin-top: 10px;
+           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+           /* Smooth snap */
+       }
+
+       /* =========================================
+           CLICK ANIMATION (Add this)
+           ========================================= */
+       .btn-login:active {
+           transform: scale(0.96);
+           /* Shrinks the button to 96% size */
+           opacity: 0.8;
+           /* Slight fade to indicate pressure */
+           transition: transform 0.05s ease, opacity 0.05s ease;
+           /* Instant response */
+       }
+
+       .btn-login:hover {
+           background-color: transparent;
+           /* See-through */
+           color: var(--color-accent);
+           /* Text turns black */
+           /* Border remains black from original state */
+       }
+
+       /* Links */
+       .form-options {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 25px;
+           font-size: 0.85rem;
+       }
+
+       .forgot-pass {
+           color: var(--color-text-light);
+           text-decoration: underline;
+       }
+
+       .create-account {
+           margin-top: 30px;
+           padding-top: 20px;
+           border-top: 1px solid var(--color-border);
+           font-size: 0.9rem;
+           color: var(--color-text-light);
+       }
+
+       .create-account a {
+           color: var(--color-text);
+           font-weight: 700;
+           text-decoration: none;
+           margin-left: 5px;
+       }
+
+       .create-account a:hover {
+           text-decoration: underline;
+       }
+
+       /* =========================================
+           FOOTER
+           ========================================= */
+       footer {
+           background-color: #111111;
+           color: #ffffff;
+           padding: 3rem 0;
+           text-align: center;
+       }
+
+       .footer-text {
+           color: #666;
+           font-size: 0.8rem;
+       }
