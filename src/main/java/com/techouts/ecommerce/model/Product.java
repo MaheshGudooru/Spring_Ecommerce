@@ -1,6 +1,7 @@
 package com.techouts.ecommerce.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,10 +31,14 @@ public class Product {
     @Column(name = "product_description")
     private String productDescription;
 
+    @Column(nullable = false)
     private String category;
 
     @Column(name = "product_image")
     private String productImage;
+
+    @Min(value = 1, message = "Stock must be atleast one")
+    private int stock;
 
     @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems;
@@ -41,11 +46,12 @@ public class Product {
     @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
-    public Product(String name, float price, String productDescription, String category, String productImage) {
+    public Product(String name, float price, String productDescription, int stock, String category, String productImage) {
 
         this.name = name;
         this.price = price;
         this.productDescription = productDescription;
+        this.stock = stock;
         this.category = category;
         this.productImage = productImage;
 

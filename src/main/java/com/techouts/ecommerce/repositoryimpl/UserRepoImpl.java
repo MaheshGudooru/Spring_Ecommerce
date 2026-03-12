@@ -2,7 +2,7 @@ package com.techouts.ecommerce.repositoryimpl;
 
 import com.techouts.ecommerce.model.User;
 
-import jakarta.transaction.Transactional;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@Transactional
+
 public class UserRepoImpl {
 
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     UserRepoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

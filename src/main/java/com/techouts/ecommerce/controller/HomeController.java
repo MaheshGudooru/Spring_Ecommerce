@@ -4,11 +4,9 @@ package com.techouts.ecommerce.controller;
 import com.techouts.ecommerce.model.User;
 import com.techouts.ecommerce.service.UserService;
 
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 import java.security.Principal;
-import java.time.LocalDate;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +61,6 @@ public class HomeController {
 
         }
 
-        user.setJoinedDate(LocalDate.now());
         userService.registerUser(user);
     
         return "redirect:/home";

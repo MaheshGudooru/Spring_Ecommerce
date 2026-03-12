@@ -40,7 +40,7 @@ public class User {
     @Size(min = 8, message = "Password must be at least 8 characters")
     private String password;
 
-    @Column(name = "joined_date")
+    @Column(name = "joined_date", nullable = false, updatable = false)
     private LocalDate joinedDate;
 
     @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)

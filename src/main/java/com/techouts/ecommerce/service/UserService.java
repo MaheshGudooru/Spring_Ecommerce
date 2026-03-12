@@ -4,10 +4,12 @@ import com.techouts.ecommerce.model.Cart;
 import com.techouts.ecommerce.model.User;
 import com.techouts.ecommerce.repositoryimpl.UserRepoImpl;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -20,6 +22,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional(readOnly = true)
     public User getUser(String email) {
 
         Optional<User> user = userRepo.findUser (email);
@@ -27,6 +30,7 @@ public class UserService {
 
     }
 
+    @Transactional
     public void registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -34,6 +38,7 @@ public class UserService {
         userCart.setUserId(user);
         user.setCart(userCart);
 
+        user.setJoinedDate(LocalDate.now());
         userRepo.createUser(user);
 
     }

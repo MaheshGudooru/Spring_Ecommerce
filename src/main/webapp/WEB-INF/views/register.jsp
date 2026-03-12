@@ -34,15 +34,16 @@
                             <label for="fullname">Full Name</label>
 
                             <input type="text" id="fullname" name="name" placeholder="Jane Doe" required>
-<c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
-                            <c:forEach var="error"
-                                items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
+                            <c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
+                                <c:forEach var="error"
+                                    items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
 
-                                <c:if test="${error.field == 'name'}">
-                                    <span class="error">${error.defaultMessage}</span>
-                                </c:if>
+                                    <c:if test="${error.field == 'name'}">
+                                        <span class="error">${error.defaultMessage}</span>
+                                    </c:if>
 
-                            </c:forEach></c:if>
+                                </c:forEach>
+                            </c:if>
                         </div>
 
 
@@ -51,16 +52,17 @@
                             <label for="email">Email Address</label>
 
                             <input type="email" id="email" name="email" placeholder="you@example.com" required>
-<c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
+                            <c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
 
-                            <c:forEach var="error"
-                                items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
+                                <c:forEach var="error"
+                                    items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
 
-                                <c:if test="${error.field == 'email'}">
-                                    <span class="error">${error.defaultMessage}</span>
-                                </c:if>
+                                    <c:if test="${error.field == 'email'}">
+                                        <span class="error">${error.defaultMessage}</span>
+                                    </c:if>
 
-                            </c:forEach></c:if>
+                                </c:forEach>
+                            </c:if>
                         </div>
 
 
@@ -70,16 +72,17 @@
 
                             <input type="password" id="password" name="password" placeholder="Create a strong password"
                                 required>
-<c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
+                            <c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
 
-                            <c:forEach var="error"
-                                items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
+                                <c:forEach var="error"
+                                    items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
 
-                                <c:if test="${error.field == 'password'}">
-                                    <span class="error">${error.defaultMessage}</span>
-                                </c:if>
+                                    <c:if test="${error.field == 'password'}">
+                                        <span class="error">${error.defaultMessage}</span>
+                                    </c:if>
 
-                            </c:forEach></c:if>
+                                </c:forEach>
+                            </c:if>
                         </div>
 
 
