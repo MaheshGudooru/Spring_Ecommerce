@@ -19,7 +19,13 @@ public class ProductService {
         this.productRepoImpl = productRepoImpl;
 
     }
-    
+
+    @Transactional
+    public Product getProduct(int productId) {
+
+        return productRepoImpl.getById(productId);
+
+    }
 
     @Transactional(readOnly = true)
     public List<Product> getProducts(String category) {
@@ -31,14 +37,14 @@ public class ProductService {
 
     }
 
-    public List<Product> geProducts(int page) {
-        
+    @Transactional(readOnly = true)
+    public List<Product> getProducts(int page) {
+
         int productCnt = 12;
 
         int offset = (page - 1) * productCnt;
 
         return productRepoImpl.getLimitedProducts(offset, productCnt);
-
 
     }
 
@@ -50,6 +56,6 @@ public class ProductService {
         }
 
         return false;
-    }
 
+    }
 }

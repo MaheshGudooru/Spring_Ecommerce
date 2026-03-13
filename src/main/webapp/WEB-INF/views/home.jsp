@@ -33,10 +33,10 @@
                             </c:when>
 
                             <c:otherwise>
-                                <a href="/account">Account</a>
-                                <a href="/orders">Orders</a>
-                                <a href="/cart">Cart</a>
-                                <a href="/logout">Logout</a>
+                                <a href="${pageContext.request.contextPath}/account">Account</a>
+                                <a href="${pageContext.request.contextPath}/orders">Orders</a>
+                                <a href="${pageContext.request.contextPath}/cart">Cart</a>
+                                <a href="${pageContext.request.contextPath}/logout">Logout</a>
                             </c:otherwise>
 
                         </c:choose>
@@ -76,7 +76,7 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="${pageContext.request.contextPath}/products" class="btn btn-primary">Browse Products</a>
+                    <a href="${pageContext.request.contextPath}/product" class="btn btn-primary">Browse Products</a>
                 </div>
             </section>
 

@@ -1,6 +1,5 @@
 package com.techouts.ecommerce.controller;
 
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,12 +29,13 @@ public class ProductController {
     // }
 
     @GetMapping
-    public String serveProductPage(@RequestParam(defaultValue = "1") int pageNo, Model model) {
+    public String serveProductPage(@RequestParam(name = "page", defaultValue = "1") int pageNo, Model model) {
 
-        
+        int totalProductsCnt = productService.getProducts(null).size();
 
-
-        model.addAttribute("products", productService.getProducts(null));
+        model.addAttribute("products", productService.getProducts(pageNo));
+        model.addAttribute("totalPages", (int) Math.ceil((double) (totalProductsCnt / 12)));
+        model.addAttribute("pageNo", pageNo);
 
         return "product";
 

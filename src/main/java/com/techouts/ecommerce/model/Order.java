@@ -42,7 +42,8 @@ public class Order {
     @Column(name = "delivery_address", nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OrderBy("id ASC")
     private List<OrderItem> orderItems;
 
 }

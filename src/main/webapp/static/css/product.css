@@ -177,6 +177,11 @@
             color: var(--color-text);
         }
 
+        .product-info h3 a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
         .product-info .price {
             font-size: 1.25rem;
             font-weight: 700;

@@ -17,6 +17,11 @@ import java.time.format.DateTimeFormatter;
         query = "SELECT u FROM User u WHERE u.email = :email"
 )
 
+@NamedQuery(
+    name = "User.findById",
+    query = "SELECT u FROM User u WHERE u.id = :userId"
+)
+
 @Entity
 @Table(name = "users")
 @Getter

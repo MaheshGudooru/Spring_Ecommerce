@@ -61,6 +61,13 @@ public class ProductRepoImpl {
         return product;
     }
 
+    public Product getById(int productId) {
+
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Product.class, productId);
+
+    }
+
 
 
 }

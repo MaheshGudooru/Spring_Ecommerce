@@ -1,4 +1,4 @@
-package com.techouts.ecommerce.service;
+package com.techouts.ecommerce.security;
 
 import com.techouts.ecommerce.model.User;
 import com.techouts.ecommerce.repositoryimpl.UserRepoImpl;
@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 @Service
@@ -18,18 +19,16 @@ public class CustomUserDetailService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<User> user = userRepo.findUser (email);
+        Optional<User> user = userRepo.findUserByEmail (email);
 
         if(user.isEmpty ()) {
             throw new UsernameNotFoundException ("User with the email: \"" + email + "\" not found!!!");
         }
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername (user.get ().getName ())
-                .password (user.get ().getPassword ())
-                .build ();
+        return new CustomUserDetails(user.get());
 
     }
 }

@@ -33,16 +33,18 @@
                                 </c:when>
 
                                 <c:otherwise>
-                                    <a href="/account">Account</a>
-                                    <a href="/orders">Orders</a>
-                                    <a href="/cart">Cart</a>
-                                    <a href="/logout">Logout</a>
+                                    <a href="${pageContext.request.contextPath}/account">Account</a>
+                                    <a href="${pageContext.request.contextPath}/orders">Orders</a>
+                                    <a href="${pageContext.request.contextPath}/cart">Cart</a>
+                                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
                                 </c:otherwise>
 
                             </c:choose>
                         </nav>
                     </div>
                 </header>
+
+                <div id="toast-container"></div>
 
                 <section class="page-header">
                     <h1>All Products</h1>
@@ -59,7 +61,6 @@
                 </section>
 
                 <div class="toolbar">
-                    <span class="item-count">Showing ${fn:length(productsList)} products</span>
                     <div class="sort-options">
                         <label for="sort">Sort by: </label>
                         <select id="sort" class="sort-dropdown">
@@ -74,31 +75,6 @@
                 <main class="products-container">
                     <div class="product-grid">
 
-                        <div class="product-card">
-                            <div class="image-wrapper">
-                                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500&q=80"
-                                    alt="Minimalist Laptop">
-                            </div>
-                            <div class="product-info">
-                                <span class="category">Electronics</span>
-                                <h3>Lumina Pro Laptop</h3>
-                                <span class="price">$1,299.00</span>
-                                <button class="btn-secondary">Add to Cart</button>
-                            </div>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="image-wrapper">
-                                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&q=80"
-                                    alt="Sneakers">
-                            </div>
-                            <div class="product-info">
-                                <span class="category">Footwear</span>
-                                <h3>Classic White Sneakers</h3>
-                                <span class="price">$120.00</span>
-                                <button class="btn-secondary">Add to Cart</button>
-                            </div>
-                        </div>
                         <c:choose>
 
                             <c:when test="${empty products}">
@@ -119,7 +95,7 @@
                                                     href="${pageContext.request.contextPath}/product/${product.id}">${product.name}</a>
                                             </h3>
                                             <span class="price">$${product.price}</span>
-                                            <form class="add-item-to-cart">
+                                            <form class="add-to-cart-form">
                                                 <input type="hidden" name="productId" value="${product.id}">
                                                 <button type="submit" class="btn-secondary">Add to Cart</button>
                                             </form>
@@ -130,6 +106,7 @@
                             </c:otherwise>
 
                         </c:choose>
+                    </div>
                 </main>
 
                 <!-- Pagination component -->
@@ -158,6 +135,11 @@
                         <p>&copy; 2026 Lumina Store. All rights reserved.</p>
                     </div>
                 </footer>
+                <script>
+                    const contextPath = "${pageContext.request.contextPath}";
+                </script>
+                <script src="${pageContext.request.contextPath}/static/scripts/cart.js"></script>
+                <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
 
             </body>
 

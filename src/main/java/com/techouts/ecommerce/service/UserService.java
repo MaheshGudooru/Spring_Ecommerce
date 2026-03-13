@@ -25,7 +25,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User getUser(String email) {
 
-        Optional<User> user = userRepo.findUser (email);
+        Optional<User> user = userRepo.findUserByEmail (email);
         return user.orElseGet (User::new);
 
     }
