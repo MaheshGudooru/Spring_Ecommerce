@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "order_items")
@@ -29,9 +28,9 @@ public class OrderItem {
     private int quantity;
 
     @Column(name = "purchased_price")
-    private BigDecimal purchasedPrice;
+    private float purchasedPrice;
 
-    public OrderItem(Product productId, Order orderId, int quantity, BigDecimal purchasedPrice) {
+    public OrderItem(Product productId, Order orderId, int quantity, float purchasedPrice) {
 
         this.productId = productId;
         this.orderId = orderId;

@@ -113,27 +113,27 @@ document.querySelectorAll('.increase-item-from-cart').forEach(form => {
     });
 });
 
-document.querySelectorAll('.send-user-address').forEach(form => {
-    console.log("post request sent!!")
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+// document.querySelectorAll('.send-user-address').forEach(form => {
+//     console.log("post request sent!!")
+//     form.addEventListener('submit', function (e) {
+//         e.preventDefault();
 
-        const formData = new FormData(this);
-        const params = new URLSearchParams(formData).toString();
+//         const formData = new FormData(this);
+//         const params = new URLSearchParams(formData).toString();
 
-        fetch(contextPath + '/order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params
-        })
-            .then(response => response.text())
-            .then(status => {
-                if (status === "success") {
-                    showToast("Item added to cart", "success");
-                } else {
-                    showToast("Failed to add item", "error");
-                }
-            })
-            .catch(err => console.error(err));
-    });
-});
+//         fetch(contextPath + '/order/checkout', {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//             body: params
+//         })
+//             .then(response => response.text())
+//             .then(status => {
+//                 if (status === "success") {
+//                     showToast("Item added to cart", "success");
+//                 } else {
+//                     showToast("Failed to add item", "error");
+//                 }
+//             })
+//             .catch(err => console.error(err));
+//     });
+// });

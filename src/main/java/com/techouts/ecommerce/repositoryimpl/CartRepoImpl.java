@@ -1,5 +1,6 @@
 package com.techouts.ecommerce.repositoryimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -71,6 +72,21 @@ public class CartRepoImpl {
 
         session.remove(cartItem);
 
+    }
+
+    public List<CartItem> clearCart(Cart cart) {
+
+        List<CartItem> cartItems = new ArrayList<>(getCartItems(cart));
+     
+            
+        for(CartItem cartItem : cartItems) {
+
+            removeItemFromCart (cartItem);
+
+        }
+
+        return cartItems;
+        
     }
 
     public CartItem findCartItem(Cart cart, Product product) {

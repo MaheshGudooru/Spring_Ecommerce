@@ -47,4 +47,11 @@ public class UserRepoImpl {
         session.persist(user);
 
     }
+
+    public void updateUser(User user) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(user);
+
+    }
 }

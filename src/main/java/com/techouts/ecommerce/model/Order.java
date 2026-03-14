@@ -1,13 +1,14 @@
 package com.techouts.ecommerce.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 
 @Entity
 @Table(name = "orders")
@@ -36,14 +37,33 @@ public class Order {
     @Column(name = "ordered_date")
     private LocalDate orderedDate;
 
+    @NotBlank(message = "please select a payment type")
     @Column(name = "payment_type")
     private String paymentType;
 
+    @NotBlank(message = "enter delivery address")
     @Column(name = "delivery_address", nullable = false)
     private String address;
 
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @OrderBy("id ASC")
     private List<OrderItem> orderItems;
+
+    public Order(User userId, float totalPrice, LocalDate estimatedDeliveryDate, String paymentType, String address) {
+
+        this.userId = userId;
+        this.totalPrice = totalPrice;
+        this.estimatedDeliveryDate = estimatedDeliveryDate;
+        this.paymentType = paymentType;
+        this.address = address;
+        this.orderedDate = LocalDate.now();
+
+    }
+
+    public String getFormattedOrderedDate() {
+        if (orderedDate == null)
+            return "";
+        return orderedDate.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+    }
 
 }

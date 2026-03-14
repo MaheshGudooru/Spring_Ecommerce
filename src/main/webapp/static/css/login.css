@@ -29,41 +29,6 @@
        /* =========================================
            HEADER (Matches Homepage)
            ========================================= */
-       .site-header {
-           background: var(--color-bg);
-           border-bottom: 1px solid var(--color-border);
-           padding: 20px 0;
-       }
-
-       .container {
-           max-width: 1200px;
-           margin: 0 auto;
-           padding: 0 20px;
-       }
-
-       .header-content {
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-       }
-
-       .logo {
-           font-size: 1.5rem;
-           font-weight: 800;
-           /* Extra bold like screenshot */
-           letter-spacing: -1px;
-           text-decoration: none;
-           color: var(--color-text);
-           text-transform: uppercase;
-       }
-
-       .user-nav a {
-           font-size: 0.9rem;
-           font-weight: 600;
-           text-decoration: none;
-           color: var(--color-text);
-           margin-left: 20px;
-       }
 
        /* =========================================
            LOGIN SECTION

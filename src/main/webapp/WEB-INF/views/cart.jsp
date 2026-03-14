@@ -19,6 +19,7 @@
                     <div class="container">
                         <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
                         <nav class="user-nav">
+                            <a href="${pageContext.request.contextPath}/product">Product</a>
                             <a href="${pageContext.request.contextPath}/profile">Account</a>
                             <a href="${pageContext.request.contextPath}/order">Orders</a>
                             <a href="${pageContext.request.contextPath}/cart">Cart</a>
@@ -111,12 +112,14 @@
                                             minFractionDigits="2" maxFractionDigits="2" />
                                     </span></div>
 
-                                <form class="send-user-address">
+                                <form class="send-user-address" action="${pageContext.request.contextPath}/order" method="post">
                                     <div class="address-group">
                                         <label for="deliveryAddress">Delivery Address</label>
                                         <input type="text" id="deliveryAddress" name="address"
                                             placeholder="Street, City, Zip Code" required>
                                     </div>
+
+                                    <input type="number" name="cartTotalPrice" value="${cartTotalPrice}" hidden/>
 
                                     <div class="payment-group">
                                         <label for="paymentMethod">Payment Method</label>

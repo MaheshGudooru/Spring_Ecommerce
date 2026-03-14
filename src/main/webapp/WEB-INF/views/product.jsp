@@ -33,10 +33,10 @@
                                 </c:when>
 
                                 <c:otherwise>
+                                    <a href="${pageContext.request.contextPath}/product">product</a>
                                     <a href="${pageContext.request.contextPath}/account">Account</a>
-                                    <a href="${pageContext.request.contextPath}/orders">Orders</a>
+                                    <a href="${pageContext.request.contextPath}/order">Orders</a>
                                     <a href="${pageContext.request.contextPath}/cart">Cart</a>
-                                    <a href="${pageContext.request.contextPath}/logout">Logout</a>
                                 </c:otherwise>
 
                             </c:choose>

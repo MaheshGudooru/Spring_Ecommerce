@@ -14,18 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 
-    UserRepoImpl userRepo;
+    UserRepoImpl userRepoImpl;
     PasswordEncoder passwordEncoder;
 
-    UserService (UserRepoImpl userRepo, PasswordEncoder passwordEncoder) {
-        this.userRepo = userRepo;
+    UserService (UserRepoImpl userRepoImpl, PasswordEncoder passwordEncoder) {
+        this.userRepoImpl = userRepoImpl;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional(readOnly = true)
     public User getUser(String email) {
 
-        Optional<User> user = userRepo.findUserByEmail (email);
+        Optional<User> user = userRepoImpl.findUserByEmail (email);
         return user.orElseGet (User::new);
 
     }
@@ -39,7 +39,28 @@ public class UserService {
         user.setCart(userCart);
 
         user.setJoinedDate(LocalDate.now());
-        userRepo.createUser(user);
+        userRepoImpl.createUser(user);
+
+    }
+
+    @Transactional
+    public String updateUserDetails(String emailAddress, String fullName) {
+
+
+        User user = userRepoImpl.findUserByEmail(emailAddress).orElse(null);
+
+        if(user == null) {
+
+            return "User with this email already exists";
+
+        }
+
+        user.setName(fullName);
+        user.setEmail(emailAddress);
+
+        userRepoImpl.updateUser(user);
+
+        return "success";
 
     }
 }

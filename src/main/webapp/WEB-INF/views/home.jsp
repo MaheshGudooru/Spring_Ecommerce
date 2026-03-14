@@ -17,7 +17,7 @@
             <!-- HEADER -->
             <header class="site-header">
                 <div class="container header-content">
-                    <a href="#" class="logo">LUMINA</a>
+                    <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
 
                     <div class="search-bar">
                         <input type="text" placeholder="Search for anything...">
@@ -29,14 +29,14 @@
 
 
                             <c:when test="${pageContext.request.userPrincipal == null}">
-                                <a href="/login">Login</a>
+                                <a href="${pageContext.request.contextPath}/login">Login</a>
                             </c:when>
 
                             <c:otherwise>
-                                <a href="${pageContext.request.contextPath}/account">Account</a>
-                                <a href="${pageContext.request.contextPath}/orders">Orders</a>
-                                <a href="${pageContext.request.contextPath}/cart">Cart</a>
-                                <a href="${pageContext.request.contextPath}/logout">Logout</a>
+                                    <a href="${pageContext.request.contextPath}/product">product</a>
+                                    <a href="${pageContext.request.contextPath}/account">Account</a>
+                                    <a href="${pageContext.request.contextPath}/order">Orders</a>
+                                    <a href="${pageContext.request.contextPath}/cart">Cart</a>
                             </c:otherwise>
 
                         </c:choose>
