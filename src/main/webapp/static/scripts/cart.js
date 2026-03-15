@@ -14,16 +14,26 @@ document.querySelectorAll(".add-to-cart-form").forEach(form => {
             },
             body: params
         })
-            .then(response => response.text())
+            .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+
+                    return response.text();
+                }
+            )
             .then(status => {
 
-                const productName = status.split("::")[1];
+                if(!status) return;
 
+                const productName = status.split("::")[1];
 
                 if (status.indexOf("success") !== -1) {
                     showToast(productName + " added to cart", "success");
                 } else {
                     showToast("Failed to add item", "error");
+                    console.log("status: " + status)
                 }
             })
             .catch(() => {
@@ -43,7 +53,7 @@ document.querySelectorAll('.remove-item-from-cart').forEach(form => {
 
         fetch(contextPath + '/cart/remove', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: params
         })
 
@@ -71,7 +81,7 @@ document.querySelectorAll('.reduce-item-from-cart').forEach(form => {
 
         fetch(contextPath + '/cart/decreasecnt', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: params
         })
             .then(response => response.text())
@@ -98,7 +108,7 @@ document.querySelectorAll('.increase-item-from-cart').forEach(form => {
 
         fetch(contextPath + '/cart/increasecnt', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: params
         }).then(response => response.text())
             .then(status => {

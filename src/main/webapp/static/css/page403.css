@@ -1,0 +1,217 @@
+    /* =========================================
+       1. RESET & THEME VARIABLES
+       ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --color-bg: #ffffff;
+    --color-text: #111111;
+    --color-text-light: #666666;
+    --color-border: #eaeaec;
+    --color-accent: #111111;
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+    color: var(--color-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. HEADER
+   ========================================= */
+.site-header {
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: var(--color-bg);
+    z-index: 100;
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.user-nav {
+    display: flex;
+    gap: 40px;
+}
+
+.user-nav a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: opacity 0.3s ease;
+}
+
+.user-nav a:hover {
+    opacity: 0.6;
+}
+
+/* =========================================
+   3. 403 EMPTY STATE LAYOUT
+   ========================================= */
+.empty-state-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Pushes footer down naturally */
+    min-height: 70vh;
+    width: 100%;
+    background-color: #fafafa;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-state-content {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Massive background text effect for the 403 */
+.error-code {
+    font-size: clamp(6rem, 15vw, 12rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-border); /* Subtle light gray */
+    margin-bottom: -1rem; /* Pulls the title up to overlap slightly */
+    letter-spacing: -5px;
+    user-select: none; /* Prevents users from highlighting it */
+}
+
+.empty-state-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -1.5px;
+    color: var(--color-text);
+    margin: 0 0 15px 0;
+    line-height: 1.1;
+    z-index: 1; /* Ensures it sits above the 403 text */
+}
+
+.empty-state-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    max-width: 480px;
+    z-index: 1;
+}
+
+/* =========================================
+   4. DUAL BUTTON STYLING
+   ========================================= */
+.empty-state-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.btn-solid {
+    background-color: var(--color-accent);
+    color: #fff;
+    padding: 16px 35px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--color-accent);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-solid:hover {
+    background-color: transparent;
+    color: var(--color-accent);
+}
+
+.btn-solid:active {
+    transform: scale(0.96);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    padding: 16px 35px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-outline:hover {
+    background-color: var(--color-accent);
+    color: #fff;
+}
+
+.btn-outline:active {
+    transform: scale(0.96);
+}
+
+/* =========================================
+   5. FOOTER
+   ========================================= */
+footer {
+    background-color: #111111;
+    color: #ffffff;
+    padding: 3rem 5%;
+    margin-top: auto;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #999999;
+    font-size: 0.9rem;
+    border-top: 1px solid #333333;
+    padding-top: 2rem;
+}
+
+/* =========================================
+   6. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 600px) {
+    .user-nav {
+        display: none;
+    }
+    .empty-state-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn-solid,
+    .btn-outline {
+        width: 100%;
+        display: block;
+    }
+}

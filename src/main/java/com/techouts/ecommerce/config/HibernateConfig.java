@@ -52,11 +52,13 @@ public class HibernateConfig {
         props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.put("hibernate.format_sql", env.getProperty("hibernate.format_sql"));
         props.put("hibernate.use_sql_comments", env.getProperty("hibernate.use_sql_comments"));
-        props.put("hibernate.cache.use_second_level_cache", env.getProperty ("hibernate.cache.use_second_level_cache"));
-        props.put("hibernate.cache.use_query_cache", env.getProperty ("hibernate.cache.use_query_cache"));
-        props.put("hibernate.cache.region.factory_class", env.getProperty ("hibernate.cache.region.factory_class"));
-        props.put("hibernate.javax.cache.provider", env.getProperty ("hibernate.javax.cache.provider"));
-        props.put("hibernate.generate_statistics", env.getProperty ("hibernate.generate_statistics"));
+        // props.put("hibernate.cache.use_second_level_cache", env.getProperty ("hibernate.cache.use_second_level_cache"));
+        // props.put("hibernate.cache.use_query_cache", env.getProperty ("hibernate.cache.use_query_cache"));
+        // props.put("hibernate.cache.region.factory_class", env.getProperty ("hibernate.cache.region.factory_class"));
+        // props.put("hibernate.javax.cache.provider", env.getProperty ("hibernate.javax.cache.provider"));
+        // props.put("hibernate.generate_statistics", env.getProperty ("hibernate.generate_statistics"));
+        // props.put("hibernate.cache.use_minimal_puts", env.getProperty ("hibernate.cache.use_minimal_puts"));
+        // props.put("hibernate.cache.use_structured_entries", env.getProperty ("hibernate.cache.use_structured_entries"));
         sessionFactoryBean.setHibernateProperties (props);
 
         return sessionFactoryBean;

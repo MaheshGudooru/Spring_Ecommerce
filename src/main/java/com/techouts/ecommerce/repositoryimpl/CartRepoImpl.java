@@ -14,7 +14,7 @@ import com.techouts.ecommerce.model.User;
 @Repository
 public class CartRepoImpl {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     CartRepoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

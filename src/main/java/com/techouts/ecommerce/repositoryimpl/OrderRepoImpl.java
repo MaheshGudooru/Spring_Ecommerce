@@ -13,7 +13,7 @@ import com.techouts.ecommerce.model.User;
 @Repository
 public class OrderRepoImpl {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
 
     OrderRepoImpl(SessionFactory sessionFactory) {
@@ -47,7 +47,7 @@ public class OrderRepoImpl {
 
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createQuery("FROM Order WHERE userId = :user", Order.class)
+        return session.createQuery("FROM Order o WHERE o.userId = :user ORDER BY o.id DESC", Order.class)
                     .setParameter("user", user).list();
         
     }

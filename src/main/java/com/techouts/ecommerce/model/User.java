@@ -1,6 +1,5 @@
 package com.techouts.ecommerce.model;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -12,15 +11,9 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@NamedQuery(
-        name = "User.findByEmail",
-        query = "SELECT u FROM User u WHERE u.email = :email"
-)
+@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
 
-@NamedQuery(
-    name = "User.findById",
-    query = "SELECT u FROM User u WHERE u.id = :userId"
-)
+@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :userId")
 
 @Entity
 @Table(name = "users")
@@ -28,6 +21,11 @@ import java.time.format.DateTimeFormatter;
 @Setter
 @NoArgsConstructor
 public class User {
+
+    public enum UserRole {
+        ROLE_CUSTOMER, ROLE_ADMIN;
+    }
+
     @Id
     @GeneratedValue
     private int id;
@@ -51,10 +49,14 @@ public class User {
     @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
     private Cart cart;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private UserRole role = UserRole.ROLE_CUSTOMER;
+
     public String getFormattedJoinedDate() {
         if (joinedDate == null)
             return "";
-        return joinedDate.format (DateTimeFormatter.ofPattern ("MMMM dd, yyyy"));
+        return joinedDate.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
     }
 
     public User(String name, String email, String password) {
@@ -62,7 +64,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.joinedDate = LocalDate.now ();
+        this.joinedDate = LocalDate.now();
     }
 
     public User(String email, String password) {

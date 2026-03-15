@@ -19,11 +19,6 @@
                 <div class="container header-content">
                     <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
 
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search for anything...">
-                        <button type="submit">Search</button>
-                    </div>
-
                     <nav class="user-nav">
                         <c:choose>
 
@@ -33,7 +28,7 @@
                             </c:when>
 
                             <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/product">product</a>
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
                                     <a href="${pageContext.request.contextPath}/account">Account</a>
                                     <a href="${pageContext.request.contextPath}/order">Orders</a>
                                     <a href="${pageContext.request.contextPath}/cart">Cart</a>
@@ -76,9 +71,15 @@
                 </p>
 
                 <div class="hero-actions">
-                    <a href="${pageContext.request.contextPath}/product" class="btn btn-primary">Browse Products</a>
+                    <a href="${pageContext.request.contextPath}/products" class="btn btn-primary">Browse Products</a>
                 </div>
             </section>
+
+            <footer>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Lumina Store. All rights reserved.</p>
+                </div>
+            </footer>
 
         </body>
 

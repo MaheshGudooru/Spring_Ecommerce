@@ -12,7 +12,7 @@ import com.techouts.ecommerce.model.Product;
 @Repository
 public class ProductRepoImpl {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     ProductRepoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -22,9 +22,10 @@ public class ProductRepoImpl {
 
         Session session = sessionFactory.getCurrentSession();
 
-        Query<Product> query = session.createQuery("FROM Product", Product.class);
+        Query<Product> query = session.createQuery("FROM Product ORDER BY id", Product.class);
 
-        return query.setCacheable(true).list();
+        // return query.setCacheable(true).list();
+        return query.list();
 
     }
 
@@ -33,12 +34,25 @@ public class ProductRepoImpl {
         Session session = sessionFactory.getCurrentSession();
 
         return session.createQuery(
-                "SELECT p FROM Product p", Product.class)
+                        "SELECT p FROM Product p ORDER BY id", Product.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
-            
-             
+
+
+    }
+
+    public List<Product> getDuplicateProducts(String name, String category, float price, String productDescription, String productImage) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Query<Product> query = session.createQuery("FROM Product WHERE name = :name AND price = :price AND productDescription = :productDescription AND category = :category", Product.class)
+                .setParameter("name", name)
+                .setParameter("price", price)
+                .setParameter("productDescription", productDescription)
+                .setParameter("category", category);
+
+        return query.getResultList();
+
     }
 
     public List<Product> getByCategory(String category) {
@@ -46,7 +60,7 @@ public class ProductRepoImpl {
         Session session = sessionFactory.getCurrentSession();
 
         Query<Product> query = session.createQuery("FROM Product WHERE category = :category", Product.class)
-        .setParameter("category", category);
+                .setParameter("category", category);
 
         return query.setCacheable(true).list();
 
@@ -56,9 +70,7 @@ public class ProductRepoImpl {
 
         Session session = sessionFactory.getCurrentSession();
 
-        session.persist(product);
-
-        return product;
+        return session.merge(product);
     }
 
     public Product getById(int productId) {
@@ -68,6 +80,17 @@ public class ProductRepoImpl {
 
     }
 
+    public void deleteProduct(int productId) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        Product product = session.get(Product.class, productId);
+
+        if (product == null) return;
+
+        session.remove(product);
+
+    }
 
 
 }

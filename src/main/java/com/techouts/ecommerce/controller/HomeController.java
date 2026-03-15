@@ -33,6 +33,13 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/denied")
+    public String accessDenied() {
+
+        return "page403";
+
+    }
+
     @GetMapping("login")
     public String login() {
         return "login";
@@ -67,7 +74,7 @@ public class HomeController {
         return "redirect:/login";
     }
 
-    @GetMapping("/account")
+    @GetMapping("account")
     public String serveProfilePage(Model model, @AuthenticationPrincipal CustomUserDetails user) {
 
         model.addAttribute("user", user.getUser());
@@ -76,11 +83,12 @@ public class HomeController {
 
     }
 
-    @PostMapping("/account")
+    @PostMapping("account")
     public ResponseEntity<String> updateLoggedInUser(@RequestParam("fullName") String fullName,
-            @RequestParam("emailAddress") String emailAddress) {
+            @RequestParam("emailAddress") String emailAddress,
+            @AuthenticationPrincipal CustomUserDetails user) {
 
-            return ResponseEntity.ok(userService.updateUserDetails(emailAddress, fullName));
+        return ResponseEntity.ok(userService.updateUserDetails(emailAddress, fullName, user.getUser()));
 
     }
 

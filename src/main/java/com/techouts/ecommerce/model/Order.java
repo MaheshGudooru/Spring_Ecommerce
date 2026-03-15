@@ -57,6 +57,7 @@ public class Order {
         this.paymentType = paymentType;
         this.address = address;
         this.orderedDate = LocalDate.now();
+        this.estimatedDeliveryDate = LocalDate.now().plusDays(3);
 
     }
 

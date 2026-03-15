@@ -19,8 +19,8 @@ import com.techouts.ecommerce.service.ProductService;
 @RequestMapping("/cart")
 public class CartController {
 
-    private CartService cartService;
-    private ProductService productService;
+    private final CartService cartService;
+    private final ProductService  productService;
 
     CartController(CartService cartService, ProductService productService) {
         this.cartService = cartService;

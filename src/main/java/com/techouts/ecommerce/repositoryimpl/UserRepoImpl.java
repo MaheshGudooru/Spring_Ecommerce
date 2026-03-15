@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class UserRepoImpl {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     UserRepoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;

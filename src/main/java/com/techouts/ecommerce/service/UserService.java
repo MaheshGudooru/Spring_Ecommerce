@@ -17,7 +17,7 @@ public class UserService {
     UserRepoImpl userRepoImpl;
     PasswordEncoder passwordEncoder;
 
-    UserService (UserRepoImpl userRepoImpl, PasswordEncoder passwordEncoder) {
+    UserService(UserRepoImpl userRepoImpl, PasswordEncoder passwordEncoder) {
         this.userRepoImpl = userRepoImpl;
         this.passwordEncoder = passwordEncoder;
     }
@@ -25,8 +25,8 @@ public class UserService {
     @Transactional(readOnly = true)
     public User getUser(String email) {
 
-        Optional<User> user = userRepoImpl.findUserByEmail (email);
-        return user.orElseGet (User::new);
+        Optional<User> user = userRepoImpl.findUserByEmail(email);
+        return user.orElseGet(User::new);
 
     }
 
@@ -44,23 +44,22 @@ public class UserService {
     }
 
     @Transactional
-    public String updateUserDetails(String emailAddress, String fullName) {
-
+    public String updateUserDetails(String emailAddress, String fullName, User currLoggedInUser) {
 
         User user = userRepoImpl.findUserByEmail(emailAddress).orElse(null);
 
-        if(user == null) {
+        if (user == null) {
 
-            return "User with this email already exists";
+            currLoggedInUser.setName(fullName);
+            currLoggedInUser.setEmail(emailAddress);
+
+            userRepoImpl.updateUser(currLoggedInUser);
+
+            return "success" ;
 
         }
 
-        user.setName(fullName);
-        user.setEmail(emailAddress);
-
-        userRepoImpl.updateUser(user);
-
-        return "success";
+        return "User with this email already exists";
 
     }
 }

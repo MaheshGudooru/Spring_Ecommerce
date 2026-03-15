@@ -12,8 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+// @Cacheable
+// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Getter
 @Setter
 @NoArgsConstructor

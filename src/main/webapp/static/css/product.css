@@ -1,308 +1,246 @@
-        /* =========================================
-           1. RESET & THEME VARIABLES
-           ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+    /* =========================================
+       1. RESET & THEME VARIABLES
+       ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
 
-        :root {
-            --color-bg: #ffffff;
-            --color-text: #111111;
-            --color-text-light: #666666;
-            --color-border: #eaeaec;
-            --color-accent: #111111;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+:root {
+    --color-bg: #ffffff;
+    --color-text: #111111;
+    --color-text-light: #666666;
+    --color-border: #eaeaec;
+    --color-accent: #111111;
+    /* Added semantic colors for statuses */
+    --color-success: #27ae60;
+    --color-success-bg: #e8f5e9;
+    --color-danger: #d9534f;
+    --color-danger-bg: #f8d7da;
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
 
-        body {
-            background-color: #fafafa;
-            color: var(--color-text);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+body {
+    background-color: #fafafa;
+    color: var(--color-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        /* =========================================
-           3. PAGE HEADER & FILTERS
-           ========================================= */
-        .page-header {
-            background-color: var(--color-bg);
-            padding: 4rem 5% 2rem;
-            text-align: center;
-        }
+/* =========================================
+   3. PRODUCT DISPLAY LAYOUT
+   ========================================= */
+.product-section {
+    padding: 4rem 5%;
+    flex-grow: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
 
-        .page-header h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
 
-        .page-header p {
-            color: var(--color-text-light);
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-        }
+/* =========================================
+   4. SIMPLE IMAGE STACK
+   ========================================= */
+.image-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
-        .category-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+.image-stack img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    object-fit: cover;
+    background-color: var(--color-bg);
+}
 
-        .filter-btn {
-            padding: 8px 20px;
-            border: 1px solid var(--color-border);
-            border-radius: 30px;
-            background: transparent;
-            font-family: var(--font-main);
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--color-text-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+/* =========================================
+   5. PRODUCT DETAILS & FORMS
+   ========================================= */
 
-        .filter-btn:hover {
-            border-color: var(--color-text);
-            color: var(--color-text);
-        }
+/* --- NEW STOCK BADGE STYLES --- */
+.stock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
 
-        .filter-btn.active {
-            background-color: var(--color-text);
-            color: var(--color-bg);
-            border-color: var(--color-text);
-        }
+.stock-badge::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
 
-        .toolbar {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: var(--color-text-light);
-            border-bottom: 1px solid var(--color-border);
-            background-color: var(--color-bg);
-        }
+.stock-badge.in-stock {
+    color: var(--color-success);
+    background-color: var(--color-success-bg);
+}
 
-        .sort-dropdown {
-            padding: 8px 12px;
-            border: 1px solid var(--color-border);
-            background-color: transparent;
-            font-family: var(--font-main);
-            color: var(--color-text);
-            border-radius: 4px;
-            outline: none;
-            cursor: pointer;
-        }
+.stock-badge.in-stock::before {
+    background-color: var(--color-success);
+}
 
-        /* =========================================
-           4. PRODUCT GRID
-           ========================================= */
-        .products-container {
-            padding: 4rem 5% 5rem;
-            flex-grow: 1;
-            background-color: #fafafa;
-        }
+.stock-badge.out-of-stock {
+    color: var(--color-danger);
+    background-color: var(--color-danger-bg);
+}
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+.stock-badge.out-of-stock::before {
+    background-color: var(--color-danger);
+}
+/* ------------------------------ */
 
-        .product-card {
-            background-color: var(--color-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f0f0f0;
-            display: flex;
-            flex-direction: column;
-        }
+.product-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        }
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: block;
+}
 
-        .product-card .image-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
+.product-description {
+    color: var(--color-text-light);
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
 
-        .product-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
+/* Native Form Elements */
+.form-group {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
 
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
 
-        .product-info {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+input[type="number"] {
+    padding: 12px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    outline: none;
+    width: 100%;
+    max-width: 150px; /* Keep quantity box small */
+}
 
-        .product-info .category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: #777777;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
+input[type="number"]:focus {
+    border-color: var(--color-accent);
+}
 
-        .product-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--color-text);
-        }
+/* Button Layout & SMOOTH ANIMATIONS */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
 
-        .product-info h3 a {
-            color: var(--color-text);
-            text-decoration: none;
-        }
+.btn-primary {
+    background-color: var(--color-accent);
+    color: #fff;
+    border: 2px solid var(--color-accent);
+    padding: 14px 40px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        .product-info .price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 1.5rem;
-        }
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-accent);
+}
 
-        .btn-secondary {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: transparent;
-            border: 1px solid #111111;
-            color: #111111;
-            cursor: pointer;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: all 0.3s;
-            margin-top: auto;
-            font-family: var(--font-main);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
+.btn-primary:active {
+    transform: scale(0.96);
+    /* Slightly more pronounced click feel */
+}
 
-        .btn-secondary:hover {
-            background-color: #111111;
-            color: #ffffff;
-        }
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    padding: 14px 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.btn-outline:hover {
+    border-color: var(--color-accent);
+}
 
+.btn-outline:active {
+    transform: scale(0.96);
+    /* Slightly more pronounced click feel */
+}
 
-        /* =========================================
-                Pagination
-           ========================================= */
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            padding: 40px 0;
-            margin-top: 20px;
-        }
+.btn-primary:active {
+    transform: scale(0.96);
+}
 
-        .pagination {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+.btn-outline:active {
+    transform: scale(0.96);
+}
 
-        .page-link,
-        .page-nav {
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
+/* =========================================
+   6. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
-        .page-link.active {
-            background-color: #000;
-            /* Minimalist black */
-            color: #fff;
-            border-color: #000;
-        }
-
-        .page-link:hover:not(.active),
-        .page-nav:hover {
-            background-color: #f5f5f5;
-            border-color: #ccc;
-        }
-
-        .page-nav {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.8rem;
-        }
-        
-
-        /* =========================================
-           5. FOOTER
-           ========================================= */
-        footer {
-            background-color: #111111;
-            color: #ffffff;
-            padding: 3rem 5%;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            color: #999999;
-            font-size: 0.9rem;
-            border-top: 1px solid #333333;
-            padding-top: 2rem;
-        }
-
-        /* =========================================
-           6. RESPONSIVE DESIGN
-           ========================================= */
-        @media (max-width: 768px) {
-            .toolbar {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .user-nav {
-                display: none;
-            }
-
-            .category-filters {
-                gap: 0.5rem;
-            }
-
-            .filter-btn {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-        }
+@media (max-width: 600px) {
+    .action-buttons {
+        flex-direction: column;
+        max-width: 100%;
+    }
+}

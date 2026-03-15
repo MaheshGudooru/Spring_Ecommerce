@@ -1,154 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-        <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-            <!DOCTYPE html>
-            <html lang="en">
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<!DOCTYPE html>
+<html lang="en">
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Your Orders - Lumina Store</title>
-                <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/order.css">
-                <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/global.css">
-            </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders - Lumina Store</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/order.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/global.css">
+</head>
 
-            <body>
+<body>
 
-                <header class="site-header">
-                    <div class="container header-content">
-                        <a href="#" class="logo">LUMINA</a>
+<header class="site-header">
+    <div class="container header-content">
+        <a href="#" class="logo">LUMINA</a>
 
-                        <div class="search-bar">
-                            <input type="text" placeholder="Search for anything...">
-                            <button type="submit">Search</button>
-                        </div>
-
-                        <nav class="user-nav">
-                            <c:choose>
+        <nav class="user-nav">
+            <c:choose>
 
 
-                                <c:when test="${pageContext.request.userPrincipal == null}">
-                                    <a href="/login">Login</a>
-                                </c:when>
+                <c:when test="${pageContext.request.userPrincipal == null}">
+                    <a href="/login">Login</a>
+                </c:when>
 
-                                <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/product">product</a>
-                                    <a href="${pageContext.request.contextPath}/account">Account</a>
-                                    <a href="${pageContext.request.contextPath}/order">Orders</a>
-                                    <a href="${pageContext.request.contextPath}/cart">Cart</a>
-                                </c:otherwise>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/products">product</a>
+                    <a href="${pageContext.request.contextPath}/account">Account</a>
+                    <a href="${pageContext.request.contextPath}/order">Orders</a>
+                    <a href="${pageContext.request.contextPath}/cart">Cart</a>
+                </c:otherwise>
 
-                            </c:choose>
-                        </nav>
+            </c:choose>
+        </nav>
+    </div>
+</header>
+
+<c:if test="${empty userOrderMap}">
+    <main class="empty-state-container">
+        <div class="empty-state-content">
+
+            <div class="empty-state-icon">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#666666"
+                     stroke-width="1.5" stroke-linecap="square">
+                    <path
+                            d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                    <path d="m3.3 7 8.7 5 8.7-5"/>
+                    <path d="M12 22V12"/>
+                </svg>
+            </div>
+
+            <h1 class="empty-state-title">YOU HAVE NO<br>ORDERS YET</h1>
+            <p class="empty-state-subtitle">The pieces you love are waiting for you. Discover our latest
+                arrivals and tech essentials.</p>
+
+            <div class="empty-state-actions">
+                <a href="${pageContext.request.contextPath}/home" class="btn-solid">Shop Collection</a>
+            </div>
+
+        </div>
+    </main>
+</c:if>
+
+<c:if test="${!empty userOrderMap}">
+    <main class="orders-section">
+        <div class="page-header">
+            <h1>Order History</h1>
+        </div>
+
+        <c:forEach var="entry" items="${userOrderMap}">
+            <c:set var="order" value="${entry.key}"/>
+            <c:set var="orderItems" value="${entry.value}"/>
+
+            <div class="order-card">
+
+                <div class="order-meta">
+                    <div class="meta-group">
+                        <label>Order Placed</label>
+                        <span>${order.formattedOrderedDate}</span>
                     </div>
-                </header>
-
-                <c:if test="${empty userOrderMap}">
-                    <main class="empty-state-container">
-                        <div class="empty-state-content">
-
-                            <div class="empty-state-icon">
-                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#666666"
-                                    stroke-width="1.5" stroke-linecap="square">
-                                    <path
-                                        d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                                    <path d="m3.3 7 8.7 5 8.7-5" />
-                                    <path d="M12 22V12" />
-                                </svg>
-                            </div>
-
-                            <h1 class="empty-state-title">YOU HAVE NO<br>ORDERS YET</h1>
-                            <p class="empty-state-subtitle">The pieces you love are waiting for you. Discover our latest
-                                arrivals and tech essentials.</p>
-
-                            <div class="empty-state-actions">
-                                <a href="${pageContext.request.contextPath}/home" class="btn-solid">Shop Collection</a>
-                            </div>
-
-                        </div>
-                    </main>
-                </c:if>
-
-                <c:if test="${!empty userOrderMap}">
-                    <main class="orders-section">
-                        <div class="page-header">
-                            <h1>Order History</h1>
-                        </div>
-
-                        <c:forEach var="entry" items="${userOrderMap}">
-                            <c:set var="order" value="${entry.key}" />
-                            <c:set var="orderItems" value="${entry.value}" />
-
-                            <div class="order-card">
-
-                                <div class="order-meta">
-                                    <div class="meta-group">
-                                        <label>Order Placed</label>
-                                        <span>${order.formattedOrderedDate}</span>
-                                    </div>
-                                    <div class="meta-group">
-                                        <label>Total</label>
-                                        <span>
+                    <div class="meta-group">
+                        <label>Total</label>
+                        <span>
                                             $
                                             <fmt:formatNumber value="${order.totalPrice}" type="number"
-                                                minFractionDigits="2" maxFractionDigits="2" />
+                                                              minFractionDigits="2" maxFractionDigits="2"/>
                                         </span>
-                                    </div>
-                                    <div class="meta-group">
-                                        <label>Order #</label>
-                                        <span>LM-4545${order.id}</span>
-                                    </div>
-                                    <div class="meta-group">
-                                        <label>Status</label>
-                                        <c:choose>
-                                            <c:when test="${order.deliveryStatus == 'DELIVERED'}">
+                    </div>
+                    <div class="meta-group">
+                        <label>Order #</label>
+                        <span>LM-4545${order.id}</span>
+                    </div>
+                    <div class="meta-group">
+                        <label>Status</label>
+                        <c:choose>
+                            <c:when test="${order.deliveryStatus == 'DELIVERED'}">
                                                 <span
-                                                    class="status-badge status-delivered">${order.deliveryStatus}</span>
-                                            </c:when>
-                                            <c:when test="${order.deliveryStatus == 'PROCESSING'}">
+                                                        class="status-badge status-delivered">${order.deliveryStatus}</span>
+                            </c:when>
+                            <c:when test="${order.deliveryStatus == 'PROCESSING'}">
                                                 <span
-                                                    class="status-badge status-processing">${order.deliveryStatus}</span>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <span class="status-badge status-pending">${order.deliveryStatus}</span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </div>
-                                </div>
+                                                        class="status-badge status-processing">${order.deliveryStatus}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="status-badge status-pending">${order.deliveryStatus}</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
 
-                                <div class="order-items">
-                                    <c:forEach var="item" items="${orderItems}">
-                                        <div class="order-item">
-                                            <img src="${item.productId.productImage}" alt="${item.productId.name}"
-                                                class="item-image">
-                                            <div class="item-info">
-                                                <h3>${item.productId.name}</h3>
-                                                <p>Quantity: ${item.quantity} • ${item.productId.productDescription}</p>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-
-                                <c:if test="${order.deliveryStatus != 'CANCELLED'}">
-                                    <div class="order-footer">
-                                        <form class="order-cancellation">
-                                            <input type="hidden" name="orderId" value="${order.id}">
-                                            <button type="submit" class="btn-cancel">Cancel Order</button>
-                                        </form>
-                                    </div>
-                                </c:if>
-
+                <div class="order-items">
+                    <c:forEach var="item" items="${orderItems}">
+                        <div class="order-item">
+                            <img src="${item.productId.productImage}" alt="${item.productId.name}"
+                                 class="item-image">
+                            <div class="item-info">
+                                <h3>${item.productId.name}</h3>
+                                <p>Quantity: ${item.quantity} • ${item.productId.productDescription}</p>
                             </div>
-                        </c:forEach>
+                        </div>
+                    </c:forEach>
+                </div>
 
-                    </main>
+                <c:if test="${order.deliveryStatus != 'CANCELLED'}">
+                    <div class="order-footer">
+                        <form class="order-cancellation">
+                            <input type="hidden" name="orderId" value="${order.id}">
+                            <button type="submit" class="btn-cancel">Cancel Order</button>
+                        </form>
+                    </div>
                 </c:if>
 
-                <script>
-                    const contextPath = "${pageContext.request.contextPath}";
-                </script>
-                <script src="${pageContext.request.contextPath}/static/scripts/order.js"></script>
+            </div>
+        </c:forEach>
 
-            </body>
+    </main>
+</c:if>
 
-            </html>
+<footer>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Lumina Store. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
+<script src="${pageContext.request.contextPath}/static/scripts/order.js"></script>
+
+</body>
+
+</html>

@@ -30,13 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.querySelectorAll('.update-user-details').addEventListener('submit', function (e) {
+document.querySelector('.update-user-details').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const cartItemId = this.querySelector("input[name='cartItemId']").value;
-
-    const params = new URLSearchParams();
-    params.append("cartItemId", cartItemId);
+    const formData = new FormData(this);
+    const params = new URLSearchParams(formData).toString();
 
     fetch(contextPath + '/account', {
         method: 'POST',

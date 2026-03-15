@@ -49,13 +49,58 @@ public class ProductService {
     }
 
     @Transactional
-    public boolean saveProduct(Product product) {
+    public void saveProduct(Product product) {
 
-        if(productRepoImpl.save(product) != null) {
-            return true;
-        }
-
-        return false;
+        productRepoImpl.save(product);
 
     }
+    @Transactional
+    public Product createNewProduct(String name, String category, float price, String productDescription, int stock, String productImage) {
+
+        List<Product> alreadyExistingProducts = productRepoImpl.getDuplicateProducts(name, category, price,productDescription, productImage);
+
+        if (alreadyExistingProducts.isEmpty()) {
+            return productRepoImpl.save(new Product(name, price, productDescription, stock, category, productImage));
+        }
+
+        return null;
+
+    }
+
+    @Transactional
+    public void updateProductDetails(int productId, String productName, String category, float price, int stock, String productDescription, String productImage) {
+
+        Product product = productRepoImpl.getById(productId);
+
+        if (productName != null && !productName.isBlank()) {
+            product.setName(productName.trim());
+        }
+
+        if (category != null && !category.isBlank()) {
+            product.setCategory(category.trim());
+        }
+
+        if (productDescription != null && !productDescription.isBlank()) {
+            product.setProductDescription(productDescription.trim());
+        }
+
+        if (productImage != null && !productImage.isBlank()) {
+            product.setProductImage(productImage.trim());
+        }
+
+        product.setPrice(price);
+        product.setStock(stock);
+
+        productRepoImpl.save(product);
+        // productRepoImpl.evictProductFromCache(productId);
+
+    }
+
+    @Transactional
+    public void deleteProduct(int productId) {
+
+        productRepoImpl.deleteProduct(productId);
+
+    }
+
 }

@@ -21,21 +21,15 @@
                     <div class="container header-content">
                         <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
 
-                        <div class="search-bar">
-                            <input type="text" placeholder="Search for anything...">
-                            <button type="submit">Search</button>
-                        </div>
-
                         <nav class="user-nav">
                             <c:choose>
-
 
                                 <c:when test="${pageContext.request.userPrincipal == null}">
                                     <a href="${pageContext.request.contextPath}/login">Login</a>
                                 </c:when>
 
                                 <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/product">product</a>
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
                                     <a href="${pageContext.request.contextPath}/account">Account</a>
                                     <a href="${pageContext.request.contextPath}/order">Orders</a>
                                     <a href="${pageContext.request.contextPath}/cart">Cart</a>
@@ -101,6 +95,9 @@
                     </div>
                 </footer>
 
+                <script>
+                    const contextPath = "${pageContext.request.contextPath}";
+                </script>
                 <script src="${pageContext.request.contextPath}/static/scripts/account.js"></script>
                 <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
 

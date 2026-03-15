@@ -38,9 +38,10 @@ public class SecurityConfig {
                 .authenticationProvider (authenticationProvider ())
                 .authorizeHttpRequests (
                         auth -> auth
-                                // .requestMatchers ("/products", "/home", "/static/**").permitAll ()
-                                // .requestMatchers ("/profile", "cart", "order").authenticated ()
-                                .anyRequest ().permitAll ()
+                                .requestMatchers ("/products", "/product/*", "/home", "/static/**").permitAll ()
+                                .requestMatchers ("/account", "/cart", "/cart/*", "/order", "/order/*").authenticated ()
+                                .requestMatchers ("/admin", "/admin/*").hasRole ("ADMIN")
+                                .anyRequest ().permitAll()
 
                 )
                 .formLogin ((formLogin) ->
@@ -52,7 +53,8 @@ public class SecurityConfig {
                                 .defaultSuccessUrl ("/home")
                                 .failureUrl ("/login?failed")
                                 .permitAll ()
-                );
+                )
+                .exceptionHandling(exception -> exception.accessDeniedPage("/denied"));
 
         return httpSecurity.build ();
     }
