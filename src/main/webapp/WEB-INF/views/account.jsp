@@ -24,11 +24,16 @@
                         <nav class="user-nav">
                             <c:choose>
 
+
                                 <c:when test="${pageContext.request.userPrincipal == null}">
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
                                     <a href="${pageContext.request.contextPath}/login">Login</a>
                                 </c:when>
 
                                 <c:otherwise>
+                                    <c:if test="${pageContext.request.userPrincipal.name == 'admin@gmail.com'}">
+                                        <a href="${pageContext.request.contextPath}/admin">admin</a>
+                                    </c:if>
                                     <a href="${pageContext.request.contextPath}/products">product</a>
                                     <a href="${pageContext.request.contextPath}/account">Account</a>
                                     <a href="${pageContext.request.contextPath}/order">Orders</a>

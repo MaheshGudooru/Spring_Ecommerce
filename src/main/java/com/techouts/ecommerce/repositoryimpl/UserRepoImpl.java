@@ -2,6 +2,7 @@ package com.techouts.ecommerce.repositoryimpl;
 
 import com.techouts.ecommerce.model.User;
 
+import com.techouts.ecommerce.repository.UserRepo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 
-public class UserRepoImpl {
+public class UserRepoImpl implements UserRepo {
 
     private final SessionFactory sessionFactory;
 

@@ -13,7 +13,7 @@
         </head>
 
         <body>
-
+            <div id="toast-container"></div>
             <header class="site-header">
                 <div class="container">
                     <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
@@ -100,6 +100,13 @@
                     </a>
                 </div>
             </main>
+
+            <c:if test="${emailExists}">
+            <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
+            <script>
+                showToast("Email already in user!", "warning");
+            </script>
+            </c:if>
 
         </body>
 

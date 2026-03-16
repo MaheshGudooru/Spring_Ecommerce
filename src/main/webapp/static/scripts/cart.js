@@ -2,10 +2,13 @@ document.querySelectorAll(".add-to-cart-form").forEach(form => {
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const productId = this.querySelector("input[name='productId']").value;
+//        const productId = this.querySelector("input[name='productId']").value;
+//
+//        const params = new URLSearchParams();
+//        params.append("productId", productId);
 
-        const params = new URLSearchParams();
-        params.append("productId", productId);
+         const formData = new FormData(this);
+         const params = new URLSearchParams(formData).toString();
 
         fetch(contextPath + "/cart/add", {
             method: "POST",

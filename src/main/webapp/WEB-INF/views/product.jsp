@@ -16,30 +16,34 @@
             </head>
 
             <body>
+            <div id="toast-container"></div>
+                <header class="site-header">
+                    <div class="container header-content">
+                        <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
 
-            <header class="site-header">
-                <div class="container header-content">
-                    <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
-
-                    <nav class="user-nav">
-                        <c:choose>
+                        <nav class="user-nav">
+                            <c:choose>
 
 
-                            <c:when test="${pageContext.request.userPrincipal == null}">
-                                <a href="${pageContext.request.contextPath}/login">Login</a>
-                            </c:when>
+                                <c:when test="${pageContext.request.userPrincipal == null}">
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
+                                    <a href="${pageContext.request.contextPath}/login">Login</a>
+                                </c:when>
 
-                            <c:otherwise>
-                                <a href="${pageContext.request.contextPath}/products">product</a>
-                                <a href="${pageContext.request.contextPath}/account">Account</a>
-                                <a href="${pageContext.request.contextPath}/order">Orders</a>
-                                <a href="${pageContext.request.contextPath}/cart">Cart</a>
-                            </c:otherwise>
+                                <c:otherwise>
+                                    <c:if test="${pageContext.request.userPrincipal.name == 'admin@gmail.com'}">
+                                        <a href="${pageContext.request.contextPath}/admin">admin</a>
+                                    </c:if>
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
+                                    <a href="${pageContext.request.contextPath}/account">Account</a>
+                                    <a href="${pageContext.request.contextPath}/order">Orders</a>
+                                    <a href="${pageContext.request.contextPath}/cart">Cart</a>
+                                </c:otherwise>
 
-                        </c:choose>
-                    </nav>
-                </div>
-            </header>
+                            </c:choose>
+                        </nav>
+                    </div>
+                </header>
 
                 <main class="product-section">
 
@@ -69,7 +73,7 @@
 
                             <p class="product-description">${productDetail.productDescription}</p>
 
-                            <form class="product-user-action">
+                            <form class="add-to-cart-form">
 
                                 <div class="form-group">
                                     <label for="quantity">Quantity</label>
@@ -80,8 +84,6 @@
                                     <input type="hidden" name="productId" value="${productDetail.id}">
                                     <button type="submit" class="btn-primary" onclick="">Add to
                                         Cart</button>
-                                    <button type="submit" class="btn-outline" onclick="">Order
-                                        Now</button>
                                 </div>
 
                             </form>

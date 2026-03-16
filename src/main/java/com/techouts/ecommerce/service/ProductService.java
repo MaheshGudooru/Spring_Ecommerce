@@ -3,6 +3,7 @@ package com.techouts.ecommerce.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techouts.ecommerce.repository.ProductRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +13,9 @@ import com.techouts.ecommerce.repositoryimpl.ProductRepoImpl;
 @Service
 public class ProductService {
 
-    ProductRepoImpl productRepoImpl;
+    ProductRepo productRepoImpl;
 
-    ProductService(ProductRepoImpl productRepoImpl) {
+    ProductService(ProductRepo productRepoImpl) {
 
         this.productRepoImpl = productRepoImpl;
 

@@ -2,6 +2,7 @@ package com.techouts.ecommerce.repositoryimpl;
 
 import java.util.List;
 
+import com.techouts.ecommerce.repository.ProductRepo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.techouts.ecommerce.model.Product;
 
 @Repository
-public class ProductRepoImpl {
+public class ProductRepoImpl implements ProductRepo {
 
     private final SessionFactory sessionFactory;
 
@@ -69,6 +70,8 @@ public class ProductRepoImpl {
     public Product save(Product product) {
 
         Session session = sessionFactory.getCurrentSession();
+
+        product.setCategory (product.getCategory ().toUpperCase ());
 
         return session.merge(product);
     }

@@ -17,17 +17,22 @@
 
                 <header class="site-header">
                     <div class="container header-content">
-                        <a href="#" class="logo">LUMINA</a>
+                        <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
 
                         <nav class="user-nav">
                             <c:choose>
 
+
                                 <c:when test="${pageContext.request.userPrincipal == null}">
-                                    <a href="/login">Login</a>
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
+                                    <a href="${pageContext.request.contextPath}/login">Login</a>
                                 </c:when>
 
                                 <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/product">product</a>
+                                    <c:if test="${pageContext.request.userPrincipal.name == 'admin@gmail.com'}">
+                                        <a href="${pageContext.request.contextPath}/admin">admin</a>
+                                    </c:if>
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
                                     <a href="${pageContext.request.contextPath}/account">Account</a>
                                     <a href="${pageContext.request.contextPath}/order">Orders</a>
                                     <a href="${pageContext.request.contextPath}/cart">Cart</a>
@@ -44,27 +49,7 @@
                     <h1>All Products</h1>
                     <p>Discover our complete collection of minimalist essentials, meticulously crafted for your everyday
                         life.</p>
-
-                    <div class="category-filters">
-                        <button class="filter-btn active">All</button>
-                        <button class="filter-btn">Electronics</button>
-                        <button class="filter-btn">Footwear</button>
-                        <button class="filter-btn">Apparel</button>
-                        <button class="filter-btn">Home</button>
-                    </div>
                 </section>
-
-                <div class="toolbar">
-                    <div class="sort-options">
-                        <label for="sort">Sort by: </label>
-                        <select id="sort" class="sort-dropdown">
-                            <option value="featured">Featured</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="newest">Newest Arrivals</option>
-                        </select>
-                    </div>
-                </div>
 
                 <main class="products-container">
                     <div class="product-grid">
@@ -86,7 +71,7 @@
                                             <span class="category">${product.category}</span>
                                             <h3>
                                                 <a
-                                                    href="${pageContext.request.contextPath}/product/${product.id}">${product.name}</a>
+                                                    href="${pageContext.request.contextPath}/products/${product.id}">${product.name}</a>
                                             </h3>
                                             <span class="price">$${product.price}</span>
                                             <form class="add-to-cart-form">

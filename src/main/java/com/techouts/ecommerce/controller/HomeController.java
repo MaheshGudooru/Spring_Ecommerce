@@ -69,7 +69,12 @@ public class HomeController {
 
         }
 
-        userService.registerUser(user);
+        boolean emailInUse = userService.registerUser(user);
+
+        if(!emailInUse) {
+            model.addAttribute ("emailExists", true);
+            return "register";
+        }
 
         return "redirect:/login";
     }

@@ -2,6 +2,9 @@ package com.techouts.ecommerce.service;
 
 import java.util.List;
 
+import com.techouts.ecommerce.repository.CartRepo;
+import com.techouts.ecommerce.repository.ProductRepo;
+import com.techouts.ecommerce.repository.UserRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +19,11 @@ import com.techouts.ecommerce.repositoryimpl.UserRepoImpl;
 @Service
 public class CartService {
 
-    private CartRepoImpl cartRepoImpl;
-    private ProductRepoImpl productRepoImpl;
-    private UserRepoImpl userRepoImpl;
+    private CartRepo cartRepoImpl;
+    private ProductRepo productRepoImpl;
+    private UserRepo userRepoImpl;
 
-    CartService(CartRepoImpl cartRepoImpl, ProductRepoImpl productRepoImpl, UserRepoImpl userRepoImpl) {
+    CartService(CartRepo cartRepoImpl, ProductRepo productRepoImpl, UserRepo userRepoImpl) {
         this.cartRepoImpl = cartRepoImpl;
         this.productRepoImpl = productRepoImpl;
         this.userRepoImpl = userRepoImpl;
@@ -56,7 +59,7 @@ public class CartService {
     }
 
     @Transactional
-    public void addToCart(User user, int productId) {
+    public void addToCart(User user, int productId, int quantity) {
 
         User managedUser = userRepoImpl.getById(user.getId()).orElse(null);
 
@@ -68,12 +71,12 @@ public class CartService {
 
         if (cartItemInQuestion == null) {
 
-            cartRepoImpl.saveItemToCart(new CartItem(userCart, product, 1));
+            cartRepoImpl.saveItemToCart(new CartItem(userCart, product, quantity));
             return;
 
         }
 
-        cartItemInQuestion.setQuantity(cartItemInQuestion.getQuantity() + 1);
+        cartItemInQuestion.setQuantity(cartItemInQuestion.getQuantity() + quantity);
 
         cartRepoImpl.updateItemInCart(cartItemInQuestion);
 

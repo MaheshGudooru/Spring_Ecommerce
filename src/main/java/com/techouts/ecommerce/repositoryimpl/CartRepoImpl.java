@@ -2,6 +2,8 @@ package com.techouts.ecommerce.repositoryimpl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.techouts.ecommerce.repository.CartRepo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -12,7 +14,7 @@ import com.techouts.ecommerce.model.Product;
 import com.techouts.ecommerce.model.User;
 
 @Repository
-public class CartRepoImpl {
+public class CartRepoImpl implements CartRepo {
 
     private final SessionFactory sessionFactory;
 

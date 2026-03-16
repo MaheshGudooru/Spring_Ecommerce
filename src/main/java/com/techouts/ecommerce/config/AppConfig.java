@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(basePackages = "com.techouts.ecommerce")
 public class AppConfig {
 
-    static {
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
-    }
+//    static {
+//        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
+//    }
 }

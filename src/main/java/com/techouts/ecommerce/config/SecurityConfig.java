@@ -38,10 +38,10 @@ public class SecurityConfig {
                 .authenticationProvider (authenticationProvider ())
                 .authorizeHttpRequests (
                         auth -> auth
-                                .requestMatchers ("/products", "/product/*", "/home", "/static/**").permitAll ()
-                                .requestMatchers ("/account", "/cart", "/cart/*", "/order", "/order/*").authenticated ()
-                                .requestMatchers ("/admin", "/admin/*").hasRole ("ADMIN")
-                                .anyRequest ().permitAll()
+                                .requestMatchers ("/products", "/products/*", "/home", "/static/**").permitAll ()
+                                .requestMatchers ("/account", "/cart", "/cart/**", "/order", "/order/**").authenticated ()
+                                .requestMatchers ("/admin", "/admin/**").hasRole ("ADMIN")
+                                .anyRequest ().permitAll ()
 
                 )
                 .formLogin ((formLogin) ->
@@ -54,7 +54,13 @@ public class SecurityConfig {
                                 .failureUrl ("/login?failed")
                                 .permitAll ()
                 )
-                .exceptionHandling(exception -> exception.accessDeniedPage("/denied"));
+                .logout (logout -> logout
+                        .logoutUrl ("/logout")
+                        .logoutSuccessUrl ("/login?logout")
+                        .permitAll ()
+                )
+                .headers (header -> header.cacheControl (cacheControlConfig -> {}))
+                .exceptionHandling (exception -> exception.accessDeniedPage ("/denied"));
 
         return httpSecurity.build ();
     }
@@ -62,7 +68,7 @@ public class SecurityConfig {
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider ();
         daoAuthenticationProvider.setUserDetailsService (userDetailService);
-        daoAuthenticationProvider.setPasswordEncoder (passwordEncoder());
+        daoAuthenticationProvider.setPasswordEncoder (passwordEncoder ());
 
         return daoAuthenticationProvider;
     }

@@ -15,29 +15,33 @@
         <body>
 
             <!-- HEADER -->
-            <header class="site-header">
-                <div class="container header-content">
-                    <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
+                <header class="site-header">
+                    <div class="container header-content">
+                        <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
 
-                    <nav class="user-nav">
-                        <c:choose>
+                        <nav class="user-nav">
+                            <c:choose>
 
 
-                            <c:when test="${pageContext.request.userPrincipal == null}">
-                                <a href="${pageContext.request.contextPath}/login">Login</a>
-                            </c:when>
+                                <c:when test="${pageContext.request.userPrincipal == null}">
+                                    <a href="${pageContext.request.contextPath}/products">product</a>
+                                    <a href="${pageContext.request.contextPath}/login">Login</a>
+                                </c:when>
 
-                            <c:otherwise>
+                                <c:otherwise>
+                                    <c:if test="${pageContext.request.userPrincipal.name == 'admin@gmail.com'}">
+                                        <a href="${pageContext.request.contextPath}/admin">admin</a>
+                                    </c:if>
                                     <a href="${pageContext.request.contextPath}/products">product</a>
                                     <a href="${pageContext.request.contextPath}/account">Account</a>
                                     <a href="${pageContext.request.contextPath}/order">Orders</a>
                                     <a href="${pageContext.request.contextPath}/cart">Cart</a>
-                            </c:otherwise>
+                                </c:otherwise>
 
-                        </c:choose>
-                    </nav>
-                </div>
-            </header>
+                            </c:choose>
+                        </nav>
+                    </div>
+                </header>
 
 
             <!-- MARQUEE BANNER -->

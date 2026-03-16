@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.techouts.ecommerce.model.*;
+import com.techouts.ecommerce.repository.CartRepo;
+import com.techouts.ecommerce.repository.OrderRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +17,11 @@ import com.techouts.ecommerce.repositoryimpl.OrderRepoImpl;
 @Service
 public class OrderService {
 
-    private final OrderRepoImpl orderRepoImpl;
-    private final CartRepoImpl cartRepoImpl;
+    private final OrderRepo orderRepoImpl;
+    private final CartRepo cartRepoImpl;
 
 
-    OrderService(OrderRepoImpl orderRepoImpl, CartRepoImpl cartRepoImpl) {
+    OrderService(OrderRepo orderRepoImpl, CartRepo cartRepoImpl) {
 
         this.orderRepoImpl = orderRepoImpl;
         this.cartRepoImpl = cartRepoImpl;

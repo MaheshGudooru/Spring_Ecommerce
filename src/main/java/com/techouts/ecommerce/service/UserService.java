@@ -2,7 +2,7 @@ package com.techouts.ecommerce.service;
 
 import com.techouts.ecommerce.model.Cart;
 import com.techouts.ecommerce.model.User;
-import com.techouts.ecommerce.repositoryimpl.UserRepoImpl;
+import com.techouts.ecommerce.repository.UserRepo;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -14,10 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 
-    UserRepoImpl userRepoImpl;
+    UserRepo userRepoImpl;
     PasswordEncoder passwordEncoder;
 
-    UserService(UserRepoImpl userRepoImpl, PasswordEncoder passwordEncoder) {
+    UserService(UserRepo userRepoImpl, PasswordEncoder passwordEncoder) {
         this.userRepoImpl = userRepoImpl;
         this.passwordEncoder = passwordEncoder;
     }
@@ -31,8 +31,13 @@ public class UserService {
     }
 
     @Transactional
-    public void registerUser(User user) {
+    public boolean registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if(userRepoImpl.findUserByEmail (user.getEmail ()).isPresent ()) {
+
+            return false;
+        }
 
         Cart userCart = new Cart();
         userCart.setUserId(user);
@@ -40,6 +45,8 @@ public class UserService {
 
         user.setJoinedDate(LocalDate.now());
         userRepoImpl.createUser(user);
+
+        return true;
 
     }
 

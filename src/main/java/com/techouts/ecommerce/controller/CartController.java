@@ -41,6 +41,7 @@ public class CartController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addProductToCart(@RequestParam("productId") int productId,
+            @RequestParam(name = "quantity", defaultValue = "1", required = false) int quantity,
             @AuthenticationPrincipal CustomUserDetails user) {
 
         System.out.println("PRODUCT-ID: " + productId);
@@ -49,7 +50,7 @@ public class CartController {
             return ResponseEntity.status(401).body("login_required");
         }
 
-        cartService.addToCart(user.getUser(), productId);
+        cartService.addToCart(user.getUser(), productId, quantity);
 
 
         return ResponseEntity.ok("success::" + productService.getProduct(productId).getName());

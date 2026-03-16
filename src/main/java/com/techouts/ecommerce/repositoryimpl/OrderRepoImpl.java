@@ -3,6 +3,7 @@ package com.techouts.ecommerce.repositoryimpl;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.techouts.ecommerce.repository.OrderRepo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import com.techouts.ecommerce.model.Order;
 import com.techouts.ecommerce.model.User;
 
 @Repository
-public class OrderRepoImpl {
+public class OrderRepoImpl implements OrderRepo {
 
     private final SessionFactory sessionFactory;
 
