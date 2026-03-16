@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+<div id="toast-container"></div>
 <header class="site-header">
     <div class="container">
         <a href="#" class="logo">LUMINA <span>Admin</span></a>
@@ -77,6 +77,13 @@
                     <label for="productStock">Stock Available</label>
                     <input type="number" id="productStock" name="stock"
                            value="${product.stock}" min="0" required>
+                    <c:if test="${not empty requestScope['org.springframework.validation.BindingResult.user']}">
+                        <c:forEach var="error" items="${requestScope['org.springframework.validation.BindingResult.user'].fieldErrors}">
+                           <c:if test="${error.field == 'name'}">
+                                <span class="error">${error.defaultMessage}</span>
+                           </c:if>
+                        </c:forEach>
+                    </c:if>
                 </div>
 
                 <div class="form-group hide-mobile"></div>

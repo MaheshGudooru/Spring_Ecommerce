@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,14 +27,13 @@ public class ProductController {
 
     }
 
-
     @GetMapping
     public String serveProductsPage(@RequestParam(name = "page", defaultValue = "1") int pageNo, Model model) {
 
         int totalProductsCnt = productService.getProducts (null).size ();
 
         model.addAttribute ("products", productService.getProducts (pageNo));
-        model.addAttribute ("totalPages", (int) Math.ceil ( (double)totalProductsCnt / 12));
+        model.addAttribute ("totalPages", (int) Math.ceil ((double) totalProductsCnt / 12));
         model.addAttribute ("pageNo", pageNo);
 
         return "products";

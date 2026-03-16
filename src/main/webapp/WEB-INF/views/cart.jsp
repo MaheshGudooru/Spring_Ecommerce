@@ -14,7 +14,7 @@
             </head>
 
             <body>
-
+            <div id="toast-container"></div>
                 <header class="site-header">
                     <div class="container header-content">
                         <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
@@ -60,7 +60,7 @@
                                 arrivals and tech essentials.</p>
 
                             <div class="empty-cart-actions">
-                                <a href="${pageContext.request.contextPath}/product" class="cart-btn-primary">Shop
+                                <a href="${pageContext.request.contextPath}/products" class="cart-btn-primary">Shop
                                     Collection</a>
                             </div>
                         </div>
@@ -172,6 +172,11 @@
                 </script>
                 <script src="${pageContext.request.contextPath}/static/scripts/cart.js"></script>
                 <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
+                <c:if test="${not empty message}">
+                    <script>
+                        showToast("${message}", "warning");
+                    </script>
+                </c:if>
 
             </body>
 

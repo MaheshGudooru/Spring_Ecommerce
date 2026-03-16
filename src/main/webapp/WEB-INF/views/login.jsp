@@ -30,6 +30,9 @@
                     <c:when test="${param.logout != null}">
                         <p class="login-subtitle" style="color: green;">Successfully logged out</p>
                     </c:when>
+                    <c:when test="${param.expired != null}">
+                        <p class="login-subtitle" style="color: orange;">Your session has expired. Please login again.</p>
+                    </c:when>
                     <c:otherwise>
                         <p class="login-subtitle">Enter your credentials to access your orders.</p>
                     </c:otherwise>

@@ -2,10 +2,13 @@ package com.techouts.ecommerce.controller;
 
 import com.techouts.ecommerce.model.Product;
 import com.techouts.ecommerce.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -24,7 +27,7 @@ public class AdminController {
         int totalProductsCnt = productService.getProducts(null).size();
 
         model.addAttribute("productList", productService.getProducts(pageNo));
-        model.addAttribute("totalPages", (int) Math.ceil((double) (totalProductsCnt / 12)));
+        model.addAttribute("totalPages", (int) Math.ceil((double) totalProductsCnt / 12));
         model.addAttribute("pageNo", pageNo);
 
         return "allproducts";
@@ -63,6 +66,7 @@ public class AdminController {
     @GetMapping("update/{id}")
     public String serveUpdateForm(Model model, @PathVariable(name = "id") int productId) {
 
+
         Product product = productService.getProduct(productId);
         if (product == null) {
             return null;
@@ -81,7 +85,13 @@ public class AdminController {
                                 @RequestParam("price") float price,
                                 @RequestParam("stock") int stock,
                                 @RequestParam("productDescription") String productDescription,
-                                @RequestParam("productImage") String productImage) {
+                                @RequestParam("productImage") String productImage,
+                                RedirectAttributes redirectAttributes) {
+
+        if(stock <= -1) {
+            redirectAttributes.addFlashAttribute ("message", "Stock cannot be less than zero");
+            return "redirect:/update/" + productId;
+        }
 
         productService.updateProductDetails(productId, productName, category, price, stock, productDescription, productImage);
 

@@ -29,7 +29,23 @@ public class OrderService {
     }
 
     @Transactional
-    public void placeOrder(User user, String address, float totalPrice, String paymentMethod) {
+    public String placeOrder(User user, String address, float totalPrice, String paymentMethod) {
+
+        List<CartItem> userCartItems = cartRepoImpl.getCartItems (user.getCart ());
+
+        for (CartItem cartItem : userCartItems) {
+
+            Product currProduct = cartItem.getProductId();
+
+            if(currProduct.getStock () < cartItem.getQuantity()) {
+
+                if(currProduct.getStock () == 0) {
+                    return currProduct.getName () + "is out of stock";
+                }
+                return "Stock available for " + currProduct.getName () + " is " + currProduct.getStock ();
+            }
+
+        }
 
         Order order = orderRepoImpl.createOrder(user, address, paymentMethod, totalPrice);
 
@@ -41,10 +57,9 @@ public class OrderService {
 
             Product currProduct = cartItem.getProductId();
 
-            if (currProduct.getStock() > 0) {
-                int currStock = currProduct.getStock() < cartItem.getQuantity() ? 0 :
-                        currProduct.getStock() - cartItem.getQuantity();
-            }
+            int currStock = cartItem.getQuantity () - currProduct.getStock ();
+
+            currProduct.setStock (currStock);
 
             orderItems.add(new OrderItem(
                     cartItem.getProductId(),
@@ -57,6 +72,8 @@ public class OrderService {
         order.setOrderItems(orderItems);
 
         orderRepoImpl.saveOrder(order);
+
+        return "success";
 
     }
 

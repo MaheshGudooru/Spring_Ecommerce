@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/order")
@@ -34,9 +35,15 @@ public class OrderController {
     public String placeOrder(@Valid @RequestParam("address") String address,
                              @Valid @RequestParam("paymentMethod") String paymentMethod,
                              @RequestParam("cartTotalPrice") float cartTotalPrice,
-                             @AuthenticationPrincipal CustomUserDetails user) {
+                             @AuthenticationPrincipal CustomUserDetails user,
+                             RedirectAttributes redirectAttributes) {
 
-        orderService.placeOrder (user.getUser (), address, cartTotalPrice, paymentMethod);
+        String message = orderService.placeOrder (user.getUser (), address, cartTotalPrice, paymentMethod);
+
+        if(!"success".equals (message)) {
+            redirectAttributes.addFlashAttribute ("message", message);
+            return "redirect:/cart";
+        }
 
         return "redirect:/order";
 

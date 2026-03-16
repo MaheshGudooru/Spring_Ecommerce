@@ -37,7 +37,7 @@ public class Product {
     @Column(name = "product_image")
     private String productImage;
 
-    @Min(value = 1, message = "Stock must be atleast one")
+    @Min(value = 0, message = "Stock must be atleast one")
     private int stock;
 
     @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL, orphanRemoval = true)
