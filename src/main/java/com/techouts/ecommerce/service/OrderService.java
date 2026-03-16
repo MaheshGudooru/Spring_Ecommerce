@@ -11,8 +11,6 @@ import com.techouts.ecommerce.repository.OrderRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.techouts.ecommerce.repositoryimpl.CartRepoImpl;
-import com.techouts.ecommerce.repositoryimpl.OrderRepoImpl;
 
 @Service
 public class OrderService {
@@ -40,7 +38,7 @@ public class OrderService {
             if(currProduct.getStock () < cartItem.getQuantity()) {
 
                 if(currProduct.getStock () == 0) {
-                    return currProduct.getName () + "is out of stock";
+                    return currProduct.getName () + " is out of stock";
                 }
                 return "Stock available for " + currProduct.getName () + " is " + currProduct.getStock ();
             }

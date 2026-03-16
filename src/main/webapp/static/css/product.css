@@ -1,6 +1,6 @@
-    /* =========================================
-       1. RESET & THEME VARIABLES
-       ========================================= */
+/* =========================================
+   1. RESET & THEME VARIABLES
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -109,6 +109,7 @@ body {
 .stock-badge.out-of-stock::before {
     background-color: var(--color-danger);
 }
+
 /* ------------------------------ */
 
 .product-title {
@@ -227,6 +228,20 @@ input[type="number"]:focus {
 
 .btn-outline:active {
     transform: scale(0.96);
+}
+
+.btn-out-of-stock {
+    background-color: #f0f0f0;
+    color: #999999;
+    border: 2px solid #e0e0e0;
+    padding: 14px 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: not-allowed;
+    flex-grow: 1;
+    text-align: center;
 }
 
 /* =========================================
