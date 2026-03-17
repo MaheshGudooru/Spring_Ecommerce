@@ -152,7 +152,7 @@
                                     <button type="submit" class="btn-primary">Proceed to Checkout</button>
                                 </form>
 
-                                <a href="${pageContext.request.contextPath}/product" class="continue-shopping">Continue
+                                <a href="${pageContext.request.contextPath}/products" class="continue-shopping">Continue
                                     Shopping</a>
                             </div>
 

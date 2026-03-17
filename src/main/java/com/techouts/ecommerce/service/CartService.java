@@ -12,9 +12,7 @@ import com.techouts.ecommerce.model.Cart;
 import com.techouts.ecommerce.model.CartItem;
 import com.techouts.ecommerce.model.Product;
 import com.techouts.ecommerce.model.User;
-import com.techouts.ecommerce.repositoryimpl.CartRepoImpl;
-import com.techouts.ecommerce.repositoryimpl.ProductRepoImpl;
-import com.techouts.ecommerce.repositoryimpl.UserRepoImpl;
+
 
 @Service
 public class CartService {
@@ -53,17 +51,20 @@ public class CartService {
 
         }
 
-        System.out.println("CALCULATED TOTAL PRICE: " + result);
         return result;
 
     }
 
     @Transactional
-    public void addToCart(User user, int productId, int quantity) {
+    public void addToCart(User user, int productId, int quantity) throws Exception {
 
         User managedUser = userRepoImpl.getById(user.getId()).orElse(null);
 
         Cart userCart = managedUser.getCart();
+
+        if(userCart == null) {
+            throw new Exception ("User cart not found at CartService");
+        }
 
         Product product = productRepoImpl.getById(productId);
 
@@ -102,7 +103,7 @@ public class CartService {
 
         if (isAddition) {
             cartItem.setQuantity(cartItem.getQuantity() + 1);
-        } else if (!isAddition) {
+        } else {
             cartItem.setQuantity(cartItem.getQuantity() - 1);
 
             if (cartItem.getQuantity() <= 0) {

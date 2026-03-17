@@ -425,37 +425,29 @@ body {
 
 /* Internal Button Styling to avoid conflicts */
 .cart-btn-primary {
-    background-color: #111;
+    display: block;
+    padding: 16px 35px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--color-accent);
     color: #fff;
-    padding: 16px 35px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background 0.3s ease;
-}
-
-.cart-btn-primary:hover {
-    background-color: #333;
-}
-
-.cart-btn-outline {
-    background-color: transparent;
-    color: #111;
-    border: 1px solid #111;
-    padding: 16px 35px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    border: 2px solid var(--color-accent);
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.cart-btn-outline:hover {
-    background-color: #111;
-    color: #fff;
+.cart-btn-primary:active {
+    transform: scale(0.96);
+    opacity: 0.8;
+    transition: transform 0.05s ease, opacity 0.05s ease;
+}
+
+.cart-btn-primary:hover {
+    background-color: transparent;
+    color: var(--color-accent);
 }
 
 /* Mobile Responsiveness */

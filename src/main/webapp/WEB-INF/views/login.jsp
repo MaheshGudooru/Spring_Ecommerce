@@ -16,7 +16,7 @@
         <header class="site-header">
             <div class="container">
                 <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA</a>
-                <a href="${pageContext.request.contextPath}/product" class="back-link">Back to Store</a>
+                <a href="${pageContext.request.contextPath}/products" class="back-link">Back to Store</a>
             </div>
         </header>
 

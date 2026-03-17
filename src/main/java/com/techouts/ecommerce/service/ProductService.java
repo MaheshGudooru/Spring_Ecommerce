@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.techouts.ecommerce.model.Product;
-import com.techouts.ecommerce.repositoryimpl.ProductRepoImpl;
 
 @Service
 public class ProductService {

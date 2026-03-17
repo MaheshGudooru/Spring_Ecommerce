@@ -83,4 +83,16 @@ A full-featured e-commerce web application built with Spring Framework and Sprin
 - `src/main/webapp/static/` - Static assets (CSS, JavaScript)
 - `src/main/webapp/WEB-INF/views/` - JSP view templates
 
+## Website preview
+
+<div style="display: grid; gap: 20px">
+<img src = "./scrshots/home.png"></img>
+<img src = "./scrshots/products.png"></img>
+<img src = "./scrshots/account.png"></img>
+<img src = "./scrshots/orders.png"></img>
+<img src = "./scrshots/carts.png"></img>
+<img src = "./scrshots/adminpanel.png"></img>
+<img src = "./scrshots/product_form.png"></img>
+</div>
+
 

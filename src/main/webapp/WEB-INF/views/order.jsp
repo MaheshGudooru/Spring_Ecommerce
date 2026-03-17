@@ -61,7 +61,7 @@
                 arrivals and tech essentials.</p>
 
             <div class="empty-state-actions">
-                <a href="${pageContext.request.contextPath}/home" class="btn-solid">Shop Collection</a>
+                <a href="${pageContext.request.contextPath}/products" class="btn-solid">Shop Collection</a>
             </div>
 
         </div>

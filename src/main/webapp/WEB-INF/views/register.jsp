@@ -104,7 +104,7 @@
             <c:if test="${emailExists}">
             <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
             <script>
-                showToast("Email already in user!", "warning");
+                showToast("Email already in use!", "warning");
             </script>
             </c:if>
 

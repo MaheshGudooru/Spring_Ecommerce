@@ -40,7 +40,7 @@ public class AdminController {
 
     }
 
-    @GetMapping("/add")
+    @GetMapping("add")
     public String serveProductCreationForm() {
 
         return "addproduct";
@@ -88,7 +88,7 @@ public class AdminController {
 
         if(stock <= -1) {
             redirectAttributes.addFlashAttribute ("message", "Stock cannot be less than zero");
-            return "redirect:/update/" + productId;
+            return "redirect:/admin/update/" + productId;
         }
 
         productService.updateProductDetails(productId, productName, category, price, stock, productDescription, productImage);

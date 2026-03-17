@@ -127,7 +127,12 @@
 </script>
 <script src="${pageContext.request.contextPath}/static/scripts/cart.js"></script>
 <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
-
+            <c:if test="${not empty message}">
+                <script src="${pageContext.request.contextPath}/static/scripts/toast.js"></script>
+                <script>
+                    showToast('${message}', "success");
+                </script>
+            </c:if>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 package com.techouts.ecommerce.controller;
 
-
 import com.techouts.ecommerce.model.Product;
 import com.techouts.ecommerce.service.ProductService;
 import jakarta.annotation.PostConstruct;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Controller
 @RequestMapping("/products")
@@ -30,140 +28,111 @@ public class ProductController {
     @GetMapping
     public String serveProductsPage(@RequestParam(name = "page", defaultValue = "1") int pageNo, Model model) {
 
-        int totalProductsCnt = productService.getProducts (null).size ();
+        int totalProductsCnt = productService.getProducts(null).size();
 
-        model.addAttribute ("products", productService.getProducts (pageNo));
-        model.addAttribute ("totalPages", (int) Math.ceil ((double) totalProductsCnt / 12));
-        model.addAttribute ("pageNo", pageNo);
+        model.addAttribute("products", productService.getProducts(pageNo));
+        model.addAttribute("totalPages", (int) Math.ceil((double) totalProductsCnt / 12));
+        model.addAttribute("pageNo", pageNo);
 
         return "products";
 
     }
 
-//    @PostConstruct
-//    public void loadProductsToDB() {
-//        List<Product> products = List.of(
-//
-//                new Product("iPhone 14", 79999f, "Apple iPhone 14 smartphone", 25, "Electronics",
-//                        "https://loremflickr.com/600/600/iphone"),
-//
-//                new Product("Samsung Galaxy S23", 74999f, "Samsung flagship Android smartphone", 30, "Electronics",
-//                        "https://loremflickr.com/600/600/samsung-phone"),
-//
-//                new Product("MacBook Air M2", 119999f, "Apple MacBook Air laptop", 15, "Electronics",
-//                        "https://loremflickr.com/600/600/macbook"),
-//
-//                new Product("Dell XPS 13", 109999f, "Dell XPS ultrabook laptop", 12, "Electronics",
-//                        "https://loremflickr.com/600/600/dell-laptop"),
-//
-//                new Product("Sony WH-1000XM5", 29999f, "Noise cancelling headphones", 20, "Electronics",
-//                        "https://loremflickr.com/600/600/headphones"),
-//
-//                new Product("Apple Watch Series 9", 45999f, "Apple smartwatch", 18, "Electronics",
-//                        "https://loremflickr.com/600/600/apple-watch"),
-//
-//                new Product("iPad Air", 59999f, "Apple tablet device", 22, "Electronics",
-//                        "https://loremflickr.com/600/600/ipad"),
-//
-//                new Product("Logitech MX Master 3 Mouse", 8999f, "Wireless productivity mouse", 40, "Electronics",
-//                        "https://loremflickr.com/600/600/computer-mouse"),
-//
-//                new Product("Mechanical Keyboard", 6999f, "RGB mechanical keyboard", 35, "Electronics",
-//                        "https://loremflickr.com/600/600/mechanical-keyboard"),
-//
-//                new Product("Gaming Monitor 27 inch", 24999f, "144Hz gaming monitor", 10, "Electronics",
-//                        "https://loremflickr.com/600/600/gaming-monitor"),
-//
-//                new Product("Nike Running Shoes", 5999f, "Comfortable running shoes", 50, "Fashion",
-//                        "https://loremflickr.com/600/600/running-shoes"),
-//
-//                new Product("Adidas Hoodie", 3999f, "Warm casual hoodie", 45, "Fashion",
-//                        "https://loremflickr.com/600/600/hoodie"),
-//
-//                new Product("Levi's Jeans", 3499f, "Classic denim jeans", 38, "Fashion",
-//                        "https://loremflickr.com/600/600/jeans"),
-//
-//                new Product("Puma Sports T-shirt", 1999f, "Breathable sports t-shirt", 60, "Fashion",
-//                        "https://loremflickr.com/600/600/sports-tshirt"),
-//
-//                new Product("RayBan Sunglasses", 8999f, "Premium sunglasses", 25, "Fashion",
-//                        "https://loremflickr.com/600/600/sunglasses"),
-//
-//                new Product("Leather Wallet", 1499f, "Genuine leather wallet", 70, "Accessories",
-//                        "https://loremflickr.com/600/600/wallet"),
-//
-//                new Product("Laptop Backpack", 2499f, "Durable backpack for laptops", 55, "Accessories",
-//                        "https://loremflickr.com/600/600/backpack"),
-//
-//                new Product("Office Chair", 12999f, "Ergonomic office chair", 20, "Furniture",
-//                        "https://loremflickr.com/600/600/office-chair"),
-//
-//                new Product("Study Table", 8999f, "Wooden study desk", 18, "Furniture",
-//                        "https://loremflickr.com/600/600/study-desk"),
-//
-//                new Product("Bookshelf", 6999f, "Modern bookshelf", 15, "Furniture",
-//                        "https://loremflickr.com/600/600/bookshelf"),
-//
-//                new Product("LED Desk Lamp", 1999f, "Adjustable desk lamp", 40, "Home",
-//                        "https://loremflickr.com/600/600/desk-lamp"),
-//
-//                new Product("Coffee Maker", 4999f, "Automatic coffee maker", 22, "Home Appliances",
-//                        "https://loremflickr.com/600/600/coffee-maker"),
-//
-//                new Product("Air Fryer", 7999f, "Healthy air fryer", 20, "Home Appliances",
-//                        "https://loremflickr.com/600/600/air-fryer"),
-//
-//                new Product("Kitchen Blender", 2999f, "High speed blender", 28, "Home Appliances",
-//                        "https://loremflickr.com/600/600/blender"),
-//
-//                new Product("Electric Kettle", 1499f, "Fast boiling kettle", 50, "Home Appliances",
-//                        "https://loremflickr.com/600/600/electric-kettle"),
-//
-//                new Product("Yoga Mat", 999f, "Non-slip yoga mat", 65, "Fitness",
-//                        "https://loremflickr.com/600/600/yoga-mat"),
-//
-//                new Product("Adjustable Dumbbells", 8999f, "Adjustable dumbbell set", 25, "Fitness",
-//                        "https://loremflickr.com/600/600/dumbbells"),
-//
-//                new Product("Resistance Bands", 799f, "Workout resistance bands", 70, "Fitness",
-//                        "https://loremflickr.com/600/600/resistance-bands"),
-//
-//                new Product("Cricket Bat", 2999f, "Professional cricket bat", 30, "Sports",
-//                        "https://loremflickr.com/600/600/cricket-bat"),
-//
-//                new Product("Football", 1499f, "Standard football", 45, "Sports",
-//                        "https://loremflickr.com/600/600/football"),
-//
-//                new Product("Basketball", 1299f, "Indoor outdoor basketball", 40, "Sports",
-//                        "https://loremflickr.com/600/600/basketball"),
-//
-//                new Product("Gaming Chair", 17999f, "Comfortable gaming chair", 12, "Furniture",
-//                        "https://loremflickr.com/600/600/gaming-chair"),
-//
-//                new Product("Smart TV 55 inch", 54999f, "4K UHD Smart TV", 10, "Electronics",
-//                        "https://loremflickr.com/600/600/smart-tv"),
-//
-//                new Product("Bluetooth Speaker", 3999f, "Portable bluetooth speaker", 35, "Electronics",
-//                        "https://loremflickr.com/600/600/bluetooth-speaker"),
-//
-//                new Product("Wireless Earbuds", 4999f, "True wireless earbuds", 45, "Electronics",
-//                        "https://loremflickr.com/600/600/wireless-earbuds")
-//
-//        );
-//
-//        for (Product product : products) {
-//            productService.saveProduct(product);
-//        }
-//    }
+    // @PostConstruct
+    public void loadProductsToDB() {
+        List<Product> products = new ArrayList<>(List.of(
+
+                /* ELECTRONICS */
+                new Product("Apple AirPods Pro (2nd Gen)", 22999, "Noise cancelling wireless earbuds.", 25,
+                        "ELECTRONICS", "https://m.media-amazon.com/images/I/61SUj2aKoEL._AC_SL1500_.jpg"),
+                new Product("Sony WH-1000XM5 Headphones", 29999, "Premium noise cancelling headphones.", 15,
+                        "ELECTRONICS", "https://m.media-amazon.com/images/I/61vIICn0KLL._AC_SL1500_.jpg"),
+                new Product("Samsung 970 EVO Plus 500GB SSD", 5999, "High-speed NVMe SSD.", 35, "ELECTRONICS",
+                        "https://m.media-amazon.com/images/I/81R2a7v7F+L._AC_SL1500_.jpg"),
+                new Product("Canon EOS 1500D DSLR Camera", 38999, "24MP DSLR with WiFi.", 10, "ELECTRONICS",
+                        "https://m.media-amazon.com/images/I/914hFeTU2-L._AC_SL1500_.jpg"),
+                new Product("Amazon Echo Dot (5th Gen)", 4499, "Smart speaker with Alexa.", 40, "ELECTRONICS",
+                        "https://m.media-amazon.com/images/I/714Rq4k05UL._AC_SL1500_.jpg"),
+
+                /* FASHION */
+                new Product("Levi's Men's Slim Fit Jeans", 2499, "Comfortable slim fit denim jeans.", 50, "FASHION",
+                        "https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL1500_.jpg"),
+                new Product("Puma Men's Cotton T-Shirt", 999, "Soft breathable cotton t-shirt.", 70, "FASHION",
+                        "https://m.media-amazon.com/images/I/71jG+e7roXL._AC_UL1500_.jpg"),
+                new Product("Allen Solly Formal Shirt", 1899, "Slim fit formal shirt for office wear.", 45, "FASHION",
+                        "https://m.media-amazon.com/images/I/61kWB+uzR2L._AC_UL1500_.jpg"),
+                new Product("BIBA Women's Kurta", 1999, "Elegant printed ethnic kurta.", 40, "FASHION",
+                        "https://m.media-amazon.com/images/I/71ZyPpZ2vBL._AC_UL1500_.jpg"),
+                new Product("H&M Women's Summer Dress", 2999, "Lightweight floral summer dress.", 35, "FASHION",
+                        "https://images.unsplash.com/photo-1520962918287-7448c2878f65"),
+
+                /* FOOTWEAR */
+                new Product("Nike Air Max 270 Shoes", 7999, "Comfortable running shoes with air cushioning.", 30,
+                        "FOOTWEAR", "https://m.media-amazon.com/images/I/71XH0ZyZ-PL._AC_UL1500_.jpg"),
+                new Product("Adidas Ultraboost Shoes", 11999, "High performance running shoes.", 20, "FOOTWEAR",
+                        "https://m.media-amazon.com/images/I/61utX8kBDlL._AC_UL1500_.jpg"),
+                new Product("Puma Casual Sneakers", 2999, "Stylish everyday sneakers.", 50, "FOOTWEAR",
+                        "https://images.unsplash.com/photo-1542291026-7eec264c27ff"),
+                new Product("Woodland Leather Boots", 4999, "Durable outdoor boots.", 25, "FOOTWEAR",
+                        "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6"),
+
+                /* HOME & KITCHEN */
+                new Product("Philips Air Fryer HD9200", 9999, "Healthy oil-free cooking.", 20, "HOME APPLIANCES",
+                        "https://m.media-amazon.com/images/I/71kJ8h6g3BL._AC_SL1500_.jpg"),
+                new Product("Prestige Induction Cooktop", 2999, "Energy efficient cooking solution.", 30,
+                        "HOME_APPLIANCES", "https://m.media-amazon.com/images/I/61S4bP9v7zL._AC_SL1500_.jpg"),
+                new Product("Milton Thermosteel Bottle", 599, "Insulated stainless steel bottle.", 100, "HOME",
+                        "https://m.media-amazon.com/images/I/71ZyPpZ2vBL._AC_SL1500_.jpg"),
+                new Product("IKEA Study Table", 8999, "Minimal wooden study desk.", 15, "FURNITURE",
+                        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85"),
+                new Product("Ergonomic Office Chair", 12999, "Comfortable chair with lumbar support.", 12, "FURNITURE",
+                        "https://images.unsplash.com/photo-1580480055273-228ff5388ef8"),
+
+                /* BOOKS */
+                new Product("Atomic Habits by James Clear", 499, "Build good habits effectively.", 80, "BOOKS",
+                        "https://images.unsplash.com/photo-1544947950-fa07a98d237f"),
+                new Product("Rich Dad Poor Dad", 399, "Personal finance classic.", 90, "BOOKS",
+                        "https://images.unsplash.com/photo-1516979187457-637abb4f9353"),
+                new Product("The Alchemist by Paulo Coelho", 350, "Inspirational novel.", 75, "BOOKS",
+                        "https://images.unsplash.com/photo-1519682337058-a94d519337bc"),
+
+                /* ACCESSORIES */
+                new Product("Ray-Ban Aviator Sunglasses", 8999, "Classic aviator sunglasses.", 30, "ACCESSORIES",
+                        "https://images.unsplash.com/photo-1511499767150-a48a237f0083"),
+                new Product("Fossil Leather Wallet", 3499, "Premium leather wallet.", 45, "ACCESSORIES",
+                        "https://images.unsplash.com/photo-1627123424574-724758594e93"),
+                new Product("Casio Digital Watch", 2499, "Durable digital wrist watch.", 50, "ACCESSORIES",
+                        "https://images.unsplash.com/photo-1523275335684-37898b6baf30"),
+
+                /* FITNESS */
+                new Product("HRX Adjustable Dumbbells Set", 4999, "Home workout dumbbells.", 30, "FITNESS",
+                        "https://images.unsplash.com/photo-1599058917212-d750089bc07e"),
+                new Product("Yoga Mat Anti-Slip", 999, "Comfortable yoga mat.", 60, "FITNESS",
+                        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b"),
+                new Product("Skipping Rope Fitness", 299, "High speed skipping rope.", 100, "FITNESS",
+                        "https://images.unsplash.com/photo-1599058917765-a780eda07a3e"),
+
+                /* BAGS */
+                new Product("Skybags Laptop Backpack", 2499, "Durable backpack with laptop sleeve.", 40, "BAGS",
+                        "https://images.unsplash.com/photo-1509762774605-f07235a08f1f"),
+                new Product("American Tourister Trolley Bag", 6999, "Lightweight travel suitcase.", 20, "BAGS",
+                        "https://images.unsplash.com/photo-1502920917128-1aa500764b8a")
+
+        ));
+
+        for (Product product : products) {
+            productService.saveProduct(product);
+        }
+    }
 
     @GetMapping("/{id}")
     public String serveProductSpecificPage(@PathVariable("id") int id, Model model) {
 
-        Product product = productService.getProduct (id);
+        Product product = productService.getProduct(id);
 
-        model.addAttribute ("productDetail", product);
+        model.addAttribute("productDetail", product);
 
-        System.out.println (product.getId ());
+        System.out.println(product.getId());
 
         return "product";
     }

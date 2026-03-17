@@ -30,6 +30,12 @@
            HEADER (Matches Homepage)
            ========================================= */
 
+       a.back-link {
+           text-decoration: none;
+           font-weight: 500;
+           color: var(--color-text);
+       }
+
        /* =========================================
            LOGIN SECTION
            ========================================= */

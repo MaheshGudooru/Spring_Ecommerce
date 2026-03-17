@@ -8,6 +8,7 @@ import java.util.Map;
 import com.techouts.ecommerce.model.*;
 import com.techouts.ecommerce.repository.CartRepo;
 import com.techouts.ecommerce.repository.OrderRepo;
+import com.techouts.ecommerce.repository.ProductRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,13 +18,14 @@ public class OrderService {
 
     private final OrderRepo orderRepoImpl;
     private final CartRepo cartRepoImpl;
+    private final ProductRepo productRepoImpl;
 
 
-    OrderService(OrderRepo orderRepoImpl, CartRepo cartRepoImpl) {
+    OrderService(OrderRepo orderRepoImpl, CartRepo cartRepoImpl, ProductRepo productRepoImpl) {
 
         this.orderRepoImpl = orderRepoImpl;
         this.cartRepoImpl = cartRepoImpl;
-
+        this.productRepoImpl = productRepoImpl;
     }
 
     @Transactional
@@ -55,9 +57,13 @@ public class OrderService {
 
             Product currProduct = cartItem.getProductId();
 
-            int currStock = cartItem.getQuantity () - currProduct.getStock ();
+            int updatedStock = currProduct.getStock () - cartItem.getQuantity ();
 
-            currProduct.setStock (currStock);
+            if (updatedStock < 0) {
+                throw new RuntimeException("Stock calculation error!");
+            }
+
+            currProduct.setStock (updatedStock);
 
             orderItems.add(new OrderItem(
                     cartItem.getProductId(),
@@ -96,6 +102,23 @@ public class OrderService {
     public void cancelOrder(int orderId) {
 
         Order currOrder = orderRepoImpl.getById(orderId);
+
+         List<OrderItem> orderItems = currOrder.getOrderItems ();
+
+         for(OrderItem orderItem : orderItems) {
+
+             int cancelledOrderStock = orderItem.getQuantity ();
+             int alreadyPresentProductStock = orderItem.getProductId ().getStock ();
+
+             orderItem.getProductId ().setStock (cancelledOrderStock + alreadyPresentProductStock);
+
+             productRepoImpl.save (orderItem.getProductId ());
+
+             System.out.println("Product ID: " + orderItem.getProductId().getId());
+             System.out.println("Current Stock: " + alreadyPresentProductStock);
+             System.out.println("Cancelled Qty: " + cancelledOrderStock);
+
+         }
 
         currOrder.setDeliveryStatus("CANCELLED");
 

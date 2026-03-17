@@ -4,6 +4,8 @@ import com.techouts.ecommerce.model.User;
 import com.techouts.ecommerce.security.CustomUserDetails;
 import com.techouts.ecommerce.service.UserService;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import java.security.Principal;
@@ -61,7 +63,7 @@ public class HomeController {
     }
 
     @PostMapping("register")
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+    public String registerUser(HttpServletRequest request, @Valid @ModelAttribute("user") User user, BindingResult result, Model model) throws ServletException {
 
         if (result.hasErrors()) {
 
@@ -69,9 +71,9 @@ public class HomeController {
 
         }
 
-        boolean emailInUse = userService.registerUser(user);
+        boolean emailNotInUse = userService.registerUser(user);
 
-        if(!emailInUse) {
+        if(!emailNotInUse) {
             model.addAttribute ("emailExists", true);
             return "register";
         }
