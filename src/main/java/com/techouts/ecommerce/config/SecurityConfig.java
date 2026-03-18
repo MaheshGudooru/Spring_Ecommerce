@@ -59,11 +59,11 @@ public class SecurityConfig {
                         .logoutSuccessUrl ("/login?logout")
                         .permitAll ()
                 )
-//                .sessionManagement (session -> session
-//                        .invalidSessionUrl ("/login?expired")
-//                        .maximumSessions (1)
-//                        .maxSessionsPreventsLogin (false)
-//                )
+                .sessionManagement (session -> session
+                        .invalidSessionUrl ("/login?expired")
+                        .maximumSessions (1)
+                        .maxSessionsPreventsLogin (false)
+                )
                 .headers (header -> header.cacheControl (cacheControlConfig -> {
                 }))
                 .exceptionHandling (exception -> exception.accessDeniedPage ("/denied"));

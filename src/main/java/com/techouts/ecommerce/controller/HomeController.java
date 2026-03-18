@@ -71,6 +71,8 @@ public class HomeController {
 
         }
 
+        String rawPassword = user.getPassword ();
+
         boolean emailNotInUse = userService.registerUser(user);
 
         if(!emailNotInUse) {
@@ -78,7 +80,9 @@ public class HomeController {
             return "register";
         }
 
-        return "redirect:/login";
+        request.login(user.getEmail (), rawPassword);
+
+        return "redirect:/home";
     }
 
     @GetMapping("account")

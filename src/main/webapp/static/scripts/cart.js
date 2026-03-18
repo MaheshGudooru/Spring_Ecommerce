@@ -63,7 +63,7 @@ document.querySelectorAll('.remove-item-from-cart').forEach(form => {
             .then(response => response.text())
             .then(status => {
                 if (status === "success") {
-                    location.reload();
+                    setTimeout(() => location.reload(), 1000);
                     showToast("Item removed from cart", "success");
                 } else {
                     showToast("Failed to remove item", "error");

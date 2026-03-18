@@ -16,7 +16,7 @@
             <div id="toast-container"></div>
             <header class="site-header">
                 <div class="container">
-                    <a href="#" class="logo">LUMINA <span>Admin</span></a>
+                    <a href="${pageContext.request.contextPath}/home" class="logo">LUMINA <span>Admin</span></a>
                     <nav class="user-nav">
                         <a href="${pageContext.request.contextPath}/logout">Logout</a>
                     </nav>

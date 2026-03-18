@@ -38,7 +38,7 @@ public class CartService {
 
     }
 
-    public float calculateTotalCartPrice(List<CartItem> userCartItems) {
+    public float[] calculateTotalCartPrice(List<CartItem> userCartItems) {
 
         float result = 0;
 
@@ -51,7 +51,7 @@ public class CartService {
 
         }
 
-        return result;
+        return new float[] {(float) (result + (result * 0.18)), (float) (result * 0.18)};
 
     }
 
@@ -84,15 +84,17 @@ public class CartService {
     }
 
     @Transactional
-    public void removeFromCart(int cartItemId) {
+    public CartItem removeFromCart(int cartItemId) {
 
         CartItem cartItemInQuestion = cartRepoImpl.getCartItem(cartItemId);
 
         if (cartItemInQuestion == null) {
-            return;
+            return null;
         }
 
         cartRepoImpl.removeItemFromCart(cartItemInQuestion);
+
+        return cartItemInQuestion;
 
     }
 

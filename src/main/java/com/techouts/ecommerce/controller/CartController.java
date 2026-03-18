@@ -35,7 +35,8 @@ public class CartController {
         List<CartItem> userCartItems = cartService.getCartItemsByUser (user.getUser ());
 
         model.addAttribute ("cartItemsList", userCartItems);
-        model.addAttribute ("cartTotalPrice", cartService.calculateTotalCartPrice (userCartItems));
+        model.addAttribute ("cartTotalPrice", cartService.calculateTotalCartPrice (userCartItems)[0]);
+        model.addAttribute ("totalCartTax", cartService.calculateTotalCartPrice (userCartItems)[1]);
 
         return "cart";
 

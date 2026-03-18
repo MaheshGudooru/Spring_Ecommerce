@@ -118,13 +118,13 @@
                             <div class="order-summary">
                                 <h2>Order Summary</h2>
                                 <div class="summary-row"><span>Subtotal</span><span>$
-                                        <fmt:formatNumber value="${cartTotalPrice}" type="number" minFractionDigits="2"
+                                        <fmt:formatNumber value="${cartTotalPrice - totalCartTax}" type="number" minFractionDigits="2"
                                             maxFractionDigits="2" />
                                     </span></div>
                                 <div class="summary-row"><span>Shipping</span><span>Free</span></div>
-                                <div class="summary-row"><span>Estimated Tax</span><span>$108.36</span></div>
+                                <div class="summary-row"><span>Estimated Tax (18% GST)</span><span>$                                            <fmt:formatNumber value="${totalCartTax}" type="number" minFractionDigits="2" maxFractionDigits="2" /></span></div>
                                 <div class="summary-total"><span>Total</span><span>$
-                                        <fmt:formatNumber value="${cartTotalPrice + 108.36}" type="number"
+                                        <fmt:formatNumber value="${cartTotalPrice}" type="number"
                                             minFractionDigits="2" maxFractionDigits="2" />
                                     </span></div>
 
@@ -175,6 +175,11 @@
                 <c:if test="${not empty message}">
                     <script>
                         showToast("${message}", "warning");
+                    </script>
+                </c:if>
+                <c:if test="${not empty cartItemRemovalStatus}">
+                    <script>
+                        showToast("${cartItemRemovalStatus}", "success");
                     </script>
                 </c:if>
 
